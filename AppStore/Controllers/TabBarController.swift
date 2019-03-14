@@ -16,7 +16,7 @@ class TabBarController: UITabBarController {
         viewControllers = [
             setupNavController(forViewController: UIViewController(), withtitle: "Today", imageName: "today"),
             setupNavController(forViewController: UIViewController(), withtitle: "Apps", imageName: "apps"),
-            setupNavController(forViewController: UIViewController(), withtitle: "Search", imageName: "search")
+            setupNavController(forViewController: SearchController() , withtitle: "Search", imageName: "search")
         ]
     }
     
