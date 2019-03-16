@@ -10,7 +10,8 @@ import UIKit
 
 class SearchController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    let cellId = "cellId"
+    fileprivate let cellId = "cellId"
+    fileprivate var searchResults = [Result]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,15 +19,35 @@ class SearchController: UICollectionViewController, UICollectionViewDelegateFlow
         collectionView.backgroundColor = .white
         collectionView.register(SearchResultCell.self, forCellWithReuseIdentifier: cellId)
         
+        fetchApps()
+        
+    }
+    
+    fileprivate func fetchApps() {
+        Service.shared.fetchApps { (results, error)  in
+            if let error = error {
+                print("Failed to retrieve apps: \(error)")
+                return
+            }
+            
+            self.searchResults = results
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SearchResultCell
+        let appResult = searchResults[indexPath.item]
+        cell.appNameLabel.text = appResult.trackName
+        cell.appGenreLabel.text = appResult.primaryGenreName
+        cell.appRatingsLabel.text = "Rating: \(appResult.averageUserRating ?? 0)"
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return searchResults.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

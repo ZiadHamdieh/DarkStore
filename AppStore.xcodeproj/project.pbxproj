@@ -14,6 +14,8 @@
 		99DC2E88223A07F900FA46EA /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DC2E87223A07F900FA46EA /* SearchController.swift */; };
 		99DC2E8A223A0CFB00FA46EA /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DC2E89223A0CFB00FA46EA /* SearchResultCell.swift */; };
 		99DC2E8D223A2B9200FA46EA /* VerticalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DC2E8C223A2B9200FA46EA /* VerticalStackView.swift */; };
+		99DC2E8F223C639800FA46EA /* AppSearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DC2E8E223C639800FA46EA /* AppSearchResults.swift */; };
+		99DC2E92223C73FD00FA46EA /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DC2E91223C73FD00FA46EA /* Service.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		99DC2E87223A07F900FA46EA /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		99DC2E89223A0CFB00FA46EA /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		99DC2E8C223A2B9200FA46EA /* VerticalStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalStackView.swift; sourceTree = "<group>"; };
+		99DC2E8E223C639800FA46EA /* AppSearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchResults.swift; sourceTree = "<group>"; };
+		99DC2E91223C73FD00FA46EA /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,7 +46,6 @@
 		99DC2E642238D17A00FA46EA = {
 			isa = PBXGroup;
 			children = (
-				99DC2E8B223A260000FA46EA /* Extensions & Helpers */,
 				99DC2E6F2238D17A00FA46EA /* AppStore */,
 				99DC2E6E2238D17A00FA46EA /* Products */,
 			);
@@ -60,9 +63,11 @@
 			isa = PBXGroup;
 			children = (
 				99DC2E702238D17A00FA46EA /* AppDelegate.swift */,
+				99DC2E90223C73F300FA46EA /* Service */,
 				99DC2E842238D6B900FA46EA /* Model */,
 				99DC2E832238D6B200FA46EA /* Views */,
 				99DC2E822238D6A600FA46EA /* Controllers */,
+				99DC2E8B223A260000FA46EA /* Extensions & Helpers */,
 				99DC2E772238D17C00FA46EA /* Assets.xcassets */,
 				99DC2E792238D17C00FA46EA /* LaunchScreen.storyboard */,
 				99DC2E7C2238D17C00FA46EA /* Info.plist */,
@@ -90,6 +95,7 @@
 		99DC2E842238D6B900FA46EA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				99DC2E8E223C639800FA46EA /* AppSearchResults.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -100,6 +106,14 @@
 				99DC2E8C223A2B9200FA46EA /* VerticalStackView.swift */,
 			);
 			path = "Extensions & Helpers";
+			sourceTree = "<group>";
+		};
+		99DC2E90223C73F300FA46EA /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				99DC2E91223C73FD00FA46EA /* Service.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,9 +187,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				99DC2E88223A07F900FA46EA /* SearchController.swift in Sources */,
+				99DC2E92223C73FD00FA46EA /* Service.swift in Sources */,
 				99DC2E862238D6E200FA46EA /* TabBarController.swift in Sources */,
 				99DC2E8A223A0CFB00FA46EA /* SearchResultCell.swift in Sources */,
 				99DC2E712238D17A00FA46EA /* AppDelegate.swift in Sources */,
+				99DC2E8F223C639800FA46EA /* AppSearchResults.swift in Sources */,
 				99DC2E8D223A2B9200FA46EA /* VerticalStackView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
