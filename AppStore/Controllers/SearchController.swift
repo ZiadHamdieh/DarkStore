@@ -15,6 +15,14 @@ class SearchController: UICollectionViewController, UICollectionViewDelegateFlow
     
     fileprivate var timer: Timer?
     
+    fileprivate let searchLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Search for apps"
+        label.textAlignment = .center
+        label.font = .boldSystemFont(ofSize: 20)
+        return label
+    }()
+    
     fileprivate let searchController = UISearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
@@ -23,13 +31,19 @@ class SearchController: UICollectionViewController, UICollectionViewDelegateFlow
         collectionView.backgroundColor = .white
         collectionView.register(SearchResultCell.self, forCellWithReuseIdentifier: cellId)
         
+        collectionView.addSubview(searchLabel)
+        searchLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            searchLabel.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor),
+            searchLabel.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: 100)
+            ])
+        
         setupSearchBar()
     }
     
     fileprivate func setupSearchBar() {
         navigationItem.searchController = searchController
         navigationItem.searchController?.dimsBackgroundDuringPresentation = false
-        navigationItem.searchController?.hidesNavigationBarDuringPresentation = false
         navigationItem.hidesSearchBarWhenScrolling = false
         
         searchController.searchBar.delegate = self
@@ -42,7 +56,6 @@ class SearchController: UICollectionViewController, UICollectionViewDelegateFlow
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in
             self.fetchApps(withSearchQuery: searchText)
         })
-        
     }
     
     fileprivate func fetchApps(withSearchQuery query: String) {
@@ -66,6 +79,7 @@ class SearchController: UICollectionViewController, UICollectionViewDelegateFlow
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        searchLabel.isHidden = searchResults.count != 0
         return searchResults.count
     }
     
