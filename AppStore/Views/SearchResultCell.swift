@@ -7,8 +7,26 @@
 //
 
 import UIKit
+import SDWebImage
 
 class SearchResultCell: UICollectionViewCell {
+    
+    // We can force unwrap here because we know Result will always be non-nil
+    var appResult: Result! {
+        didSet {
+            appNameLabel.text = appResult.trackName
+            imageView.sd_setImage(with: URL(string: appResult.artworkUrl512))
+            screenshot1ImageView.sd_setImage(with: URL(string: appResult.screenshotUrls[0]))
+            if appResult.screenshotUrls.count > 1 {
+                screenshot2ImageView.sd_setImage(with: URL(string: appResult.screenshotUrls[1]))
+            }
+            if appResult.screenshotUrls.count > 2 {
+                screenshot3ImageView.sd_setImage(with: URL(string: appResult.screenshotUrls[2]))
+            }
+            appGenreLabel.text = appResult.primaryGenreName
+            appRatingsLabel.text = "Rating: \(appResult.averageUserRating ?? 0)"
+        }
+    }
     
     let imageView: UIImageView = {
         let iv = UIImageView()
