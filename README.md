@@ -1,3 +1,5 @@
-AppStore
+# AppStore
 
-iOS App Store Replica
+### An iOS App Store Replica
+
+Pods used: SDWebImage
