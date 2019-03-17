@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class SearchController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
@@ -41,6 +42,14 @@ class SearchController: UICollectionViewController, UICollectionViewDelegateFlow
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SearchResultCell
         let appResult = searchResults[indexPath.item]
         cell.appNameLabel.text = appResult.trackName
+        cell.imageView.sd_setImage(with: URL(string: appResult.artworkUrl512))
+        cell.screenshot1ImageView.sd_setImage(with: URL(string: appResult.screenshotUrls[0]))
+        if appResult.screenshotUrls.count > 1 {
+            cell.screenshot2ImageView.sd_setImage(with: URL(string: appResult.screenshotUrls[1]))
+        }
+        if appResult.screenshotUrls.count > 2 {
+            cell.screenshot3ImageView.sd_setImage(with: URL(string: appResult.screenshotUrls[2]))
+        }
         cell.appGenreLabel.text = appResult.primaryGenreName
         cell.appRatingsLabel.text = "Rating: \(appResult.averageUserRating ?? 0)"
         return cell
@@ -51,7 +60,7 @@ class SearchController: UICollectionViewController, UICollectionViewDelegateFlow
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: view.frame.width, height: 250)
+        return .init(width: view.frame.width, height: 325)
     }
     
     init() {
