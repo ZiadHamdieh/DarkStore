@@ -8,10 +8,14 @@
 
 import UIKit
 
-class SearchController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class SearchController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     
     fileprivate let cellId = "cellId"
     fileprivate var searchResults = [Result]()
+    
+    fileprivate var timer: Timer?
+    
+    fileprivate let searchController = UISearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,12 +23,30 @@ class SearchController: UICollectionViewController, UICollectionViewDelegateFlow
         collectionView.backgroundColor = .white
         collectionView.register(SearchResultCell.self, forCellWithReuseIdentifier: cellId)
         
-        fetchApps()
+        setupSearchBar()
+    }
+    
+    fileprivate func setupSearchBar() {
+        navigationItem.searchController = searchController
+        navigationItem.searchController?.dimsBackgroundDuringPresentation = false
+        navigationItem.searchController?.hidesNavigationBarDuringPresentation = false
+        navigationItem.hidesSearchBarWhenScrolling = false
+        
+        searchController.searchBar.delegate = self
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        // introduce search throttling to avoid race conditions with search API
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in
+            self.fetchApps(withSearchQuery: searchText)
+        })
         
     }
     
-    fileprivate func fetchApps() {
-        Service.shared.fetchApps { (results, error)  in
+    fileprivate func fetchApps(withSearchQuery query: String) {
+        Service.shared.fetchApps(fromSearchQuery: query) { (results, error) in
             if let error = error {
                 print("Failed to retrieve apps: \(error)")
                 return
