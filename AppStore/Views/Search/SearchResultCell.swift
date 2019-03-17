@@ -36,21 +36,10 @@ class SearchResultCell: UICollectionViewCell {
         iv.clipsToBounds = true
         return iv
     }()
-    
-    let appNameLabel: UILabel = {
-        let label = UILabel()
-        return label
-    }()
-    
-    let appGenreLabel: UILabel = {
-        let label = UILabel()
-        return label
-    }()
-    
-    let appRatingsLabel: UILabel = {
-        let label = UILabel()
-        return label
-    }()
+
+    let appNameLabel = UILabel()
+    let appGenreLabel = UILabel()
+    let appRatingsLabel = UILabel()
     
     let getButton: UIButton = {
         let button = UIButton(type: .system)
