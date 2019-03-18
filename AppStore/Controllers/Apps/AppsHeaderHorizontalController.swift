@@ -1,14 +1,14 @@
 //
-//  AppsController.swift
+//  AppsHeaderHorizontalController.swift
 //  AppStore
 //
-//  Created by Ziad Hamdieh on 2019-03-16.
+//  Created by Ziad Hamdieh on 2019-03-18.
 //  Copyright © 2019 Ziad Hamdieh. All rights reserved.
 //
 
 import UIKit
 
-class AppsController: BaseListController {
+class AppsHeaderHorizontalController: BaseListController {
     
     let cellId = "cellId"
     
@@ -16,12 +16,17 @@ class AppsController: BaseListController {
         super.viewDidLoad()
         
         collectionView.backgroundColor = .white
+        collectionView.showsHorizontalScrollIndicator = false
         
-        collectionView.register(AppsGroupCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(AppsPageHeaderCell.self, forCellWithReuseIdentifier: cellId)
+        
+        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 3
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -30,15 +35,11 @@ class AppsController: BaseListController {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: view.frame.width, height: 300)
-    }
-    
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 5
+        return .init(width: 0.9 * view.frame.width, height: view.frame.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .init(top: 16, left: 0, bottom: 0, right: 0)
+        return .init(top: 0, left: 16, bottom: 0, right: 0)
     }
     
 }
