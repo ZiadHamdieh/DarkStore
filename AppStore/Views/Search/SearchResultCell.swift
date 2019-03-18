@@ -28,29 +28,12 @@ class SearchResultCell: UICollectionViewCell {
         }
     }
     
-    let imageView: UIImageView = {
-        let iv = UIImageView()
-        iv.widthAnchor.constraint(equalToConstant: 64).isActive = true
-        iv.heightAnchor.constraint(equalToConstant: 64).isActive = true
-        iv.layer.cornerRadius = 12
-        iv.clipsToBounds = true
-        return iv
-    }()
+    let imageView = UIImageView(cornerRadius: 12)
+    let getButton = UIButton(title: "GET", cornerRadius: 12)
 
     let appNameLabel = UILabel()
     let appGenreLabel = UILabel()
     let appRatingsLabel = UILabel()
-    
-    let getButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("GET", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
-        button.backgroundColor = UIColor(white: 0.95, alpha: 1)
-        button.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        button.heightAnchor.constraint(equalToConstant: 25).isActive = true
-        button.layer.cornerRadius = 12
-        return button
-    }()
     
     lazy var screenshot1ImageView = createScreenshotImageView()
     lazy var screenshot2ImageView = createScreenshotImageView()
@@ -68,6 +51,12 @@ class SearchResultCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        imageView.widthAnchor.constraint(equalToConstant: 64).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 64).isActive = true
+        
+        getButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        getButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
         
         let screenshotStackView = UIStackView(arrangedSubviews: [screenshot1ImageView, screenshot2ImageView, screenshot3ImageView])
         screenshotStackView.spacing = 10
