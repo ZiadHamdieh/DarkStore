@@ -22,6 +22,8 @@
 		99724C27223F78AA00204535 /* AppsPageHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99724C26223F78AA00204535 /* AppsPageHeaderCell.swift */; };
 		99724C2922406CD400204535 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99724C2822406CD400204535 /* AppGroup.swift */; };
 		99724C2B2240BAC000204535 /* HeaderResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99724C2A2240BAC000204535 /* HeaderResult.swift */; };
+		99724C2D22418D6000204535 /* HoriztonalSnappingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99724C2C22418D6000204535 /* HoriztonalSnappingController.swift */; };
+		99724C2F224199D400204535 /* CollectionViewSnappingBehaviour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99724C2E224199D400204535 /* CollectionViewSnappingBehaviour.swift */; };
 		99DC2E712238D17A00FA46EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DC2E702238D17A00FA46EA /* AppDelegate.swift */; };
 		99DC2E782238D17C00FA46EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99DC2E772238D17C00FA46EA /* Assets.xcassets */; };
 		99DC2E7B2238D17C00FA46EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99DC2E792238D17C00FA46EA /* LaunchScreen.storyboard */; };
@@ -49,6 +51,8 @@
 		99724C26223F78AA00204535 /* AppsPageHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsPageHeaderCell.swift; sourceTree = "<group>"; };
 		99724C2822406CD400204535 /* AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
 		99724C2A2240BAC000204535 /* HeaderResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderResult.swift; sourceTree = "<group>"; };
+		99724C2C22418D6000204535 /* HoriztonalSnappingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoriztonalSnappingController.swift; sourceTree = "<group>"; };
+		99724C2E224199D400204535 /* CollectionViewSnappingBehaviour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewSnappingBehaviour.swift; sourceTree = "<group>"; };
 		99DC2E6D2238D17A00FA46EA /* AppStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99DC2E702238D17A00FA46EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		99DC2E772238D17C00FA46EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -169,6 +173,7 @@
 			children = (
 				99DC2E852238D6E200FA46EA /* TabBarController.swift */,
 				99724C0F223DF38B00204535 /* BaseListController.swift */,
+				99724C2C22418D6000204535 /* HoriztonalSnappingController.swift */,
 				99724C11223DF43300204535 /* Search */,
 				99724C0C223DF21800204535 /* Apps */,
 			);
@@ -202,6 +207,7 @@
 				99724C16223DF8A600204535 /* UILabelExtension.swift */,
 				99724C20223F69CA00204535 /* UIButtonExtension.swift */,
 				99724C1E223F68BE00204535 /* UIImageViewExtension.swift */,
+				99724C2E224199D400204535 /* CollectionViewSnappingBehaviour.swift */,
 			);
 			path = "Extensions & Helpers";
 			sourceTree = "<group>";
@@ -331,10 +337,12 @@
 				99DC2E862238D6E200FA46EA /* TabBarController.swift in Sources */,
 				99DC2E8A223A0CFB00FA46EA /* SearchResultCell.swift in Sources */,
 				99724C1F223F68BE00204535 /* UIImageViewExtension.swift in Sources */,
+				99724C2F224199D400204535 /* CollectionViewSnappingBehaviour.swift in Sources */,
 				99DC2E712238D17A00FA46EA /* AppDelegate.swift in Sources */,
 				99DC2E8F223C639800FA46EA /* AppSearchResults.swift in Sources */,
 				99DC2E8D223A2B9200FA46EA /* VerticalStackView.swift in Sources */,
 				99724C21223F69CA00204535 /* UIButtonExtension.swift in Sources */,
+				99724C2D22418D6000204535 /* HoriztonalSnappingController.swift in Sources */,
 				99724C25223F75DB00204535 /* AppsHeaderHorizontalController.swift in Sources */,
 				99724C23223F72EB00204535 /* AppsPageHeader.swift in Sources */,
 				99724C19223DFDFC00204535 /* UIView+Layout.swift in Sources */,
