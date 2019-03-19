@@ -24,7 +24,6 @@ class AppRowCell: UICollectionViewCell {
         appImageView.widthAnchor.constraint(equalToConstant: 64).isActive = true
         appImageView.heightAnchor.constraint(equalToConstant: 64).isActive = true
         
-        
         getButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
         getButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
         getButton.titleLabel?.font = .boldSystemFont(ofSize: 14)
