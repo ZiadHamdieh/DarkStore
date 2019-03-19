@@ -23,10 +23,20 @@ class SearchController: BaseListController, UISearchBarDelegate {
         return label
     }()
     
+    let spinner: UIActivityIndicatorView = {
+       let indicator = UIActivityIndicatorView(style: .whiteLarge)
+        indicator.color = .black
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
     fileprivate let searchController = UISearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.addSubview(spinner)
+        spinner.fillSuperview()
         
         collectionView.backgroundColor = .white
         collectionView.register(SearchResultCell.self, forCellWithReuseIdentifier: cellId)
@@ -51,6 +61,10 @@ class SearchController: BaseListController, UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
+        if !searchText.isEmpty {
+            searchLabel.isHidden = true
+        }
+        
         // introduce search throttling to avoid race conditions with search API
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in
@@ -59,6 +73,8 @@ class SearchController: BaseListController, UISearchBarDelegate {
     }
     
     fileprivate func fetchApps(withSearchQuery query: String) {
+        spinner.startAnimating()
+        
         Service.shared.fetchApps(fromSearchQuery: query) { (results, error) in
             if let error = error {
                 print("Failed to retrieve apps: \(error)")
@@ -68,6 +84,7 @@ class SearchController: BaseListController, UISearchBarDelegate {
             self.searchResults = results
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
+                self.spinner.stopAnimating()
             }
         }
     }

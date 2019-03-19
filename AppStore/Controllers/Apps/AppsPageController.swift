@@ -16,10 +16,20 @@ class AppsPageController: BaseListController {
     var groups = [AppGroup]()
     var headerGroup = [HeaderResult]()
     
+    let spinner: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .whiteLarge)
+        indicator.color = .black
+        indicator.startAnimating()
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.backgroundColor = .white
+        view.addSubview(spinner)
+        spinner.fillSuperview()
         
         collectionView.register(AppsGroupCell.self, forCellWithReuseIdentifier: cellId)
         
@@ -62,13 +72,16 @@ class AppsPageController: BaseListController {
             paidAppsGroup = appGroup
         }
         
+        dispatchGroup.enter()
         Service.shared.fetchHeaderApps { (result, error) in
+            dispatchGroup.leave()
             if let error = error {
                 print("Failed to fetch header apps: ", error)
                 return
             }
-            guard let result = result else { return }
-            self.headerGroup = result
+
+            self.headerGroup = result ?? []
+            
         }
         
         dispatchGroup.notify(queue: .main) {
@@ -85,6 +98,7 @@ class AppsPageController: BaseListController {
                 self.groups.append(group4)
             }
             self.collectionView.reloadData()
+            self.spinner.stopAnimating()
         }
     }
     
@@ -123,6 +137,6 @@ class AppsPageController: BaseListController {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return .init(width: view.frame.width, height: 250)
+        return .init(width: view.frame.width, height: 350)
     }
 }

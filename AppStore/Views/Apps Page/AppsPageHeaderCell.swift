@@ -19,7 +19,6 @@ class AppsPageHeaderCell: UICollectionViewCell {
         
         highlightAppLabel.textColor = .blue
         highlightDescriptionLabel.numberOfLines = 2
-        imageView.backgroundColor = .black
         
         let stackView = VerticalStackView(arrangedSubviews: [highlightAppLabel, highlightDescriptionLabel, imageView], spacing: 12)
         
