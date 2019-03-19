@@ -14,6 +14,7 @@ class AppsPageController: BaseListController {
     let headerId = "headerId"
     
     var groups = [AppGroup]()
+    var headerGroup = [HeaderResult]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +62,15 @@ class AppsPageController: BaseListController {
             paidAppsGroup = appGroup
         }
         
+        Service.shared.fetchHeaderApps { (result, error) in
+            if let error = error {
+                print("Failed to fetch header apps: ", error)
+                return
+            }
+            guard let result = result else { return }
+            self.headerGroup = result
+        }
+        
         dispatchGroup.notify(queue: .main) {
             if let group1 = gamesGroup {
                 self.groups.append(group1)
@@ -106,7 +116,9 @@ class AppsPageController: BaseListController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath)
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! AppsPageHeader
+        header.horizontalController.headerGroup = headerGroup
+        header.horizontalController.collectionView.reloadData()
         return header
     }
     

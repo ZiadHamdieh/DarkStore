@@ -11,6 +11,7 @@ import UIKit
 class AppsHeaderHorizontalController: BaseListController {
     
     let cellId = "cellId"
+    var headerGroup = [HeaderResult]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,11 +27,15 @@ class AppsHeaderHorizontalController: BaseListController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return headerGroup.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! AppsPageHeaderCell
+        let appGroup = headerGroup[indexPath.item]
+        cell.highlightAppLabel.text = appGroup.name
+        cell.highlightDescriptionLabel.text = appGroup.tagline
+        cell.imageView.sd_setImage(with: URL(string: appGroup.imageUrl))
         return cell
     }
     
@@ -39,7 +44,7 @@ class AppsHeaderHorizontalController: BaseListController {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .init(top: 0, left: 16, bottom: 0, right: 0)
+        return .init(top: 0, left: 16, bottom: 0, right: 16)
     }
     
 }

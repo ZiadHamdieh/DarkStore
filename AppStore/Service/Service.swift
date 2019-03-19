@@ -73,4 +73,26 @@ class Service {
             }
             }.resume()
     }
+    
+    func fetchHeaderApps(completion: @escaping ([HeaderResult]?, Error?) -> ()) {
+        let urlString = "https://api.letsbuildthatapp.com/appstore/social"
+        
+        guard let url = URL(string: urlString) else { return }
+        
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                completion(nil, error)
+                return
+            }
+            
+            guard let data = data else { return }
+            
+            do {
+                let HeaderGroup = try JSONDecoder().decode([HeaderResult].self, from: data)
+                completion(HeaderGroup, nil)
+            } catch let jsonErr {
+                completion(nil, jsonErr)
+            }
+        }.resume()
+    }
 }
