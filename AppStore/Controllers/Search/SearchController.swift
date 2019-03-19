@@ -81,7 +81,7 @@ class SearchController: BaseListController, UISearchBarDelegate {
                 return
             }
             
-            self.searchResults = results
+            self.searchResults = results?.results ?? []
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
                 self.spinner.stopAnimating()
