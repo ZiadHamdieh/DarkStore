@@ -13,8 +13,7 @@ class AppsPageController: BaseListController {
     let cellId = "cellId"
     let headerId = "headerId"
     
-    var editorsChoiceGames: AppGroup?
-    
+    var groups = [AppGroup]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,28 +28,66 @@ class AppsPageController: BaseListController {
     }
     
     fileprivate func fetchData() {
+        
+        var gamesGroup: AppGroup?
+        var topGrossingGroup: AppGroup?
+        var freeAppsGroup: AppGroup?
+        var paidAppsGroup: AppGroup?
+        
+        // we want the data fetches to be synced together
+        let dispatchGroup = DispatchGroup()
+        
+        dispatchGroup.enter()
         Service.shared.fetchGames { (appGroup, error) in
-            
-            if let error = error {
-                print("Failed to fetch games: ", error)
-                return
+            dispatchGroup.leave()
+            gamesGroup = appGroup
+        }
+        
+        dispatchGroup.enter()
+        Service.shared.fetchTopGrossing { (appGroup, error) in
+            dispatchGroup.leave()
+            topGrossingGroup = appGroup
+        }
+        
+        dispatchGroup.enter()
+        Service.shared.fetchTopFreeIPhoneApps { (appGroup, error) in
+            dispatchGroup.leave()
+            freeAppsGroup = appGroup
+        }
+        
+        dispatchGroup.enter()
+        Service.shared.fetchTopPaidIPhoneApps { (appGroup, error) in
+            dispatchGroup.leave()
+            paidAppsGroup = appGroup
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            if let group1 = gamesGroup {
+                self.groups.append(group1)
             }
-            self.editorsChoiceGames = appGroup
-            
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
+            if let group2 = topGrossingGroup {
+                self.groups.append(group2)
             }
+            if let group3 = freeAppsGroup {
+                self.groups.append(group3)
+            }
+            if let group4 = paidAppsGroup {
+                self.groups.append(group4)
+            }
+            self.collectionView.reloadData()
         }
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return groups.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! AppsGroupCell
-        cell.titleLabel.text = editorsChoiceGames?.feed.title
-        cell.horizontalController.appGroup = editorsChoiceGames
+        
+        let appGroup = groups[indexPath.item]
+        cell.titleLabel.text =  appGroup.feed.title
+        cell.horizontalController.appGroup = appGroup
         // need to refresh controller's data so that numberOfItemsInSection runs again
         cell.horizontalController.collectionView.reloadData()
         return cell

@@ -36,8 +36,26 @@ class Service {
             }.resume()
     }
     
-    func fetchGames(completion: @escaping (AppGroup?, Error?) -> () ) {
-        guard let url = URL(string: "https://rss.itunes.apple.com/api/v1/ca/ios-apps/new-games-we-love/all/50/explicit.json") else { return }
+    func fetchGames(completion: @escaping (AppGroup?, Error?) -> ()) {
+        fetchAppGroup(urlString: "https://rss.itunes.apple.com/api/v1/ca/ios-apps/new-games-we-love/all/25/explicit.json", completion: completion)
+    }
+    
+    func fetchTopGrossing(completion: @escaping (AppGroup?, Error?) -> ()) {
+        fetchAppGroup(urlString: "https://rss.itunes.apple.com/api/v1/ca/ios-apps/top-grossing/all/25/explicit.json", completion: completion)
+    }
+    
+    func fetchTopFreeIPhoneApps(completion: @escaping (AppGroup?, Error?) -> ()) {
+        fetchAppGroup(urlString: "https://rss.itunes.apple.com/api/v1/ca/ios-apps/top-free/all/25/explicit.json", completion: completion)
+    }
+    
+    func fetchTopPaidIPhoneApps(completion: @escaping (AppGroup?, Error?) -> ()) {
+        fetchAppGroup(urlString: "https://rss.itunes.apple.com/api/v1/ca/ios-apps/top-paid/all/25/explicit.json", completion: completion)
+    }
+    
+    // Helper function
+    fileprivate func fetchAppGroup(urlString: String, completion: @escaping (AppGroup?, Error?) -> ()) {
+        
+        guard let url = URL(string: urlString) else { return }
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let error = error  {
@@ -53,8 +71,6 @@ class Service {
             } catch let jsonErr {
                 completion(nil, jsonErr)
             }
-            
-            
-        }.resume()
+            }.resume()
     }
 }
