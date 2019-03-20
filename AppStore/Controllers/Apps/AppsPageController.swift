@@ -114,6 +114,13 @@ class AppsPageController: BaseListController {
         cell.horizontalController.appGroup = appGroup
         // need to refresh controller's data so that numberOfItemsInSection runs again
         cell.horizontalController.collectionView.reloadData()
+        cell.horizontalController.didSelectHandler = { [weak self] feedResult in
+            let appController = AppDetailController()
+            appController.navigationItem.title = feedResult.name
+            appController.appId = feedResult.id
+            self?.navigationController?.pushViewController(appController, animated: true)
+            
+        }
         return cell
     }
     
@@ -139,4 +146,5 @@ class AppsPageController: BaseListController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return .init(width: view.frame.width, height: 350)
     }
+
 }

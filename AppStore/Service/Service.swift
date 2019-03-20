@@ -39,7 +39,7 @@ class Service {
     }
     
     // Helper function
-    fileprivate func fetchJSON<T: Decodable>(fromUrlString urlString: String, completion: @escaping (T?, Error?) -> ()) {
+    func fetchJSON<T: Decodable>(fromUrlString urlString: String, completion: @escaping (T?, Error?) -> ()) {
         guard let url = URL(string: urlString) else { return }
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in

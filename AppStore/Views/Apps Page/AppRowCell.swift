@@ -15,8 +15,8 @@ class AppRowCell: UICollectionViewCell {
     let appNameLabel = UILabel(text: "App Name", font: .systemFont(ofSize: 20))
     let appAuthorLabel = UILabel(text: "Company name", font: .systemFont(ofSize: 10))
     
-    let getButton = UIButton(title: "GET", cornerRadius: 12)
-    
+    let getButton = UIButton(title: "GET", cornerRadius: 15)
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -34,7 +34,7 @@ class AppRowCell: UICollectionViewCell {
         let horizontalStackView = UIStackView(arrangedSubviews: [appImageView, appInfoStackView, getButton])
         addSubview(horizontalStackView)
         horizontalStackView.fillSuperview()
-        horizontalStackView.distribution = .fillEqually
+        horizontalStackView.distribution = .fillProportionally
         horizontalStackView.alignment = .center
         horizontalStackView.spacing = 16
     }
