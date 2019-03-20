@@ -40,29 +40,43 @@ class AppDetailController: BaseListController {
         navigationItem.largeTitleDisplayMode = .never
         
         collectionView.register(AppDetailCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(AppPreviewCell.self, forCellWithReuseIdentifier: previewId)
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! AppDetailCell
-        // this will trigger the property observer in AppDetailCell.swift
-        cell.app = app
-        return cell
+        
+        if indexPath.item == 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! AppDetailCell
+            // this will trigger the property observer in AppDetailCell.swift
+            cell.app = app
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: previewId, for: indexPath) as! AppPreviewCell
+            cell.horizontalScreenshotController.app = app
+            return cell
+        }
+        
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let dummyCell = AppDetailCell(frame: .init(x: 0, y: 0, width: view.frame.width, height: 2000))
-        dummyCell.app = app
-        dummyCell.layoutIfNeeded()
+        if indexPath.item == 0 {
+            let dummyCell = AppDetailCell(frame: .init(x: 0, y: 0, width: view.frame.width, height: 2000))
+            dummyCell.app = app
+            dummyCell.layoutIfNeeded()
+            
+            let estimatedSize = dummyCell.systemLayoutSizeFitting(.init(width: view.frame.width, height: 2000))
+            let estimatedHeight = estimatedSize.height
+            
+            return .init(width: view.frame.width, height: estimatedHeight)
+        } else {
+            return .init(width: view.frame.width, height: 500)
+        }
         
-        let estimatedSize = dummyCell.systemLayoutSizeFitting(.init(width: view.frame.width, height: 2000))
-        let estimatedHeight = estimatedSize.height
-        
-        return .init(width: view.frame.width, height: estimatedHeight)
     }
     
 }

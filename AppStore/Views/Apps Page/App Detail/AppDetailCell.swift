@@ -25,7 +25,6 @@ class AppDetailCell: UICollectionViewCell {
         iv.widthAnchor.constraint(equalToConstant: 150).isActive = true
         iv.heightAnchor.constraint(equalToConstant: 150).isActive = true
         iv.contentMode = .scaleAspectFill
-        iv.backgroundColor = .black
         return iv
     }()
     
