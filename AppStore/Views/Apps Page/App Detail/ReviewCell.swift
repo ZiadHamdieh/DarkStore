@@ -12,8 +12,22 @@ class ReviewCell: UICollectionViewCell {
     
     let reviewTitleLabel = UILabel(text: "Ridiculous", font: .boldSystemFont(ofSize: 20))
     let reviewAuthorLabel = UILabel(text: "anon", font: .systemFont(ofSize: 20))
-    let starsLabel = UILabel(text: "stars", font: .systemFont(ofSize: 16))
-    let reviewBodyLabel = UILabel(text: "aslkdjaldjas", font: .systemFont(ofSize: 20), numberOfLines: 0)
+    
+    let starsStackView: UIStackView = {
+        var arrangedSubviews = [UIView]()
+        (0 ..< 5).forEach({ _ in
+            let imageView = UIImageView(image: #imageLiteral(resourceName: "star"))
+            imageView.constrainWidth(constant: 20)
+            imageView.constrainHeight(constant: 20)
+            arrangedSubviews.append(imageView)
+        })
+        // dummy view so that last star in arrangedSubviews maintains correct size
+        arrangedSubviews.append(UIView())
+        let sv = UIStackView(arrangedSubviews: arrangedSubviews)
+        return sv
+    }()
+    
+    let reviewBodyLabel = UILabel(text: "", font: .systemFont(ofSize: 20), numberOfLines: 5)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,14 +44,11 @@ class ReviewCell: UICollectionViewCell {
                 reviewTitleLabel,
                 reviewAuthorLabel
                 ], spacing: 50),
-            starsLabel,
+            starsStackView,
             reviewBodyLabel], spacing: 12)
         
         addSubview(stackView)
-        stackView.fillSuperview(padding: .init(top: 20, left: 20, bottom: 20, right: 20))
-        stackView.distribution = .fillEqually
-        
-        
+        stackView.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 20, left: 20, bottom: 0, right: 20))
     }
     
     required init?(coder aDecoder: NSCoder) {
