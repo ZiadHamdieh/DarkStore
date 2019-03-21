@@ -57,7 +57,9 @@ class AppDetailCell: UICollectionViewCell {
                     appDescriptionLabel,
                     UIStackView(arrangedSubviews: [priceButton, UIView()]), UIView()], spacing: 12)], spacing: 12),
             whatsNewLabel,
-            releaseNotes], spacing: 16)
+            releaseNotes,
+            ], spacing: 16)
+        
         addSubview(stackView)
         stackView.fillSuperview(padding: .init(top: 20, left: 20, bottom: 20, right: 20))
 

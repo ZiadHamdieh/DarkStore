@@ -10,8 +10,9 @@ import UIKit
 
 class AppDetailController: BaseListController {
     
-    let cellId = "cellId"
-    let previewId = "previewId"
+    let infoCellId = "infoCellId"
+    let previewCellId = "previewCellId"
+    let reviewCellId = "reviewCellId"
     
     var app: Result?
     
@@ -39,30 +40,35 @@ class AppDetailController: BaseListController {
         collectionView.backgroundColor = .white
         navigationItem.largeTitleDisplayMode = .never
         
-        collectionView.register(AppDetailCell.self, forCellWithReuseIdentifier: cellId)
-        collectionView.register(AppPreviewCell.self, forCellWithReuseIdentifier: previewId)
+        collectionView.register(AppDetailCell.self, forCellWithReuseIdentifier: infoCellId)
+        collectionView.register(AppPreviewCell.self, forCellWithReuseIdentifier: previewCellId)
+        collectionView.register(AppReviewsCell.self, forCellWithReuseIdentifier: reviewCellId)
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if indexPath.item == 0 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! AppDetailCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: infoCellId, for: indexPath) as! AppDetailCell
             // this will trigger the property observer in AppDetailCell.swift
             cell.app = app
             return cell
-        } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: previewId, for: indexPath) as! AppPreviewCell
+        } else if indexPath.item == 1 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: previewCellId, for: indexPath) as! AppPreviewCell
             cell.horizontalScreenshotController.app = app
             return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reviewCellId, for: indexPath) as! AppReviewsCell
+            return cell
         }
-        
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        var height: CGFloat = 0
         
         if indexPath.item == 0 {
             let dummyCell = AppDetailCell(frame: .init(x: 0, y: 0, width: view.frame.width, height: 2000))
@@ -70,12 +76,13 @@ class AppDetailController: BaseListController {
             dummyCell.layoutIfNeeded()
             
             let estimatedSize = dummyCell.systemLayoutSizeFitting(.init(width: view.frame.width, height: 2000))
-            let estimatedHeight = estimatedSize.height
-            
-            return .init(width: view.frame.width, height: estimatedHeight)
+            height = estimatedSize.height
+        } else if indexPath.item == 1 {
+            height = 500
         } else {
-            return .init(width: view.frame.width, height: 500)
+            height = 300
         }
+        return .init(width: view.frame.width, height: height)
         
     }
     
