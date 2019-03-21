@@ -115,9 +115,8 @@ class AppsPageController: BaseListController {
         // need to refresh controller's data so that numberOfItemsInSection runs again
         cell.horizontalController.collectionView.reloadData()
         cell.horizontalController.didSelectHandler = { [weak self] feedResult in
-            let appController = AppDetailController()
+            let appController = AppDetailController(appId: feedResult.id)
             appController.navigationItem.title = feedResult.name
-            appController.appId = feedResult.id
             self?.navigationController?.pushViewController(appController, animated: true)
             
         }

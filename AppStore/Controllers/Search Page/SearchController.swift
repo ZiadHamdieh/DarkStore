@@ -95,6 +95,11 @@ class SearchController: BaseListController, UISearchBarDelegate {
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let appDetailController = AppDetailController(appId: String(searchResults[indexPath.item].trackId))
+        navigationController?.pushViewController(appDetailController, animated: true)
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         searchLabel.isHidden = searchResults.count != 0
         return searchResults.count
