@@ -33,6 +33,7 @@
 		99724C3E22421CC500204535 /* AppReviewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99724C3D22421CC500204535 /* AppReviewsCell.swift */; };
 		99724C402242207200204535 /* ReviewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99724C3F2242207200204535 /* ReviewsController.swift */; };
 		99724C42224221B100204535 /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99724C41224221B100204535 /* ReviewCell.swift */; };
+		99724C44224352CC00204535 /* AppReviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99724C43224352CC00204535 /* AppReviews.swift */; };
 		99DC2E712238D17A00FA46EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DC2E702238D17A00FA46EA /* AppDelegate.swift */; };
 		99DC2E782238D17C00FA46EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99DC2E772238D17C00FA46EA /* Assets.xcassets */; };
 		99DC2E7B2238D17C00FA46EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99DC2E792238D17C00FA46EA /* LaunchScreen.storyboard */; };
@@ -71,6 +72,7 @@
 		99724C3D22421CC500204535 /* AppReviewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReviewsCell.swift; sourceTree = "<group>"; };
 		99724C3F2242207200204535 /* ReviewsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsController.swift; sourceTree = "<group>"; };
 		99724C41224221B100204535 /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
+		99724C43224352CC00204535 /* AppReviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReviews.swift; sourceTree = "<group>"; };
 		99DC2E6D2238D17A00FA46EA /* AppStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99DC2E702238D17A00FA46EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		99DC2E772238D17C00FA46EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 				99724C2822406CD400204535 /* AppGroup.swift */,
 				99DC2E8E223C639800FA46EA /* AppSearchResults.swift */,
 				99724C2A2240BAC000204535 /* HeaderResult.swift */,
+				99724C43224352CC00204535 /* AppReviews.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 				99724C2D22418D6000204535 /* HoriztonalSnappingController.swift in Sources */,
 				99724C312241E98600204535 /* AppDetailController.swift in Sources */,
 				99724C25223F75DB00204535 /* AppsHeaderHorizontalController.swift in Sources */,
+				99724C44224352CC00204535 /* AppReviews.swift in Sources */,
 				99724C38224209A700204535 /* AppPreviewCell.swift in Sources */,
 				99724C402242207200204535 /* ReviewsController.swift in Sources */,
 				99724C3C2242112900204535 /* AppScreenshotCell.swift in Sources */,
