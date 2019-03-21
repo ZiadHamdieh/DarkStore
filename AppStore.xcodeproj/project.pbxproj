@@ -117,22 +117,22 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		99724C0C223DF21800204535 /* Apps */ = {
+		99724C0C223DF21800204535 /* Apps Page */ = {
 			isa = PBXGroup;
 			children = (
 				99724C0D223DF22700204535 /* AppsPageController.swift */,
 				99724C1A223DFF4D00204535 /* AppsHorizontalController.swift */,
 				99724C24223F75DB00204535 /* AppsHeaderHorizontalController.swift */,
 			);
-			path = Apps;
+			path = "Apps Page";
 			sourceTree = "<group>";
 		};
-		99724C11223DF43300204535 /* Search */ = {
+		99724C11223DF43300204535 /* Search Page */ = {
 			isa = PBXGroup;
 			children = (
 				99DC2E87223A07F900FA46EA /* SearchController.swift */,
 			);
-			path = Search;
+			path = "Search Page";
 			sourceTree = "<group>";
 		};
 		99724C12223DF59300204535 /* Apps Page */ = {
@@ -163,6 +163,16 @@
 				99724C3B2242112900204535 /* AppScreenshotCell.swift */,
 				99724C3D22421CC500204535 /* AppReviewsCell.swift */,
 				99724C41224221B100204535 /* ReviewCell.swift */,
+			);
+			path = "App Detail";
+			sourceTree = "<group>";
+		};
+		99724C4522436C8E00204535 /* App Detail */ = {
+			isa = PBXGroup;
+			children = (
+				99724C302241E98600204535 /* AppDetailController.swift */,
+				99724C3F2242207200204535 /* ReviewsController.swift */,
+				99724C3922420DCF00204535 /* PreviewScreenshotController.swift */,
 			);
 			path = "App Detail";
 			sourceTree = "<group>";
@@ -204,14 +214,12 @@
 		99DC2E822238D6A600FA46EA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				99724C302241E98600204535 /* AppDetailController.swift */,
 				99DC2E852238D6E200FA46EA /* TabBarController.swift */,
 				99724C0F223DF38B00204535 /* BaseListController.swift */,
-				99724C3922420DCF00204535 /* PreviewScreenshotController.swift */,
-				99724C3F2242207200204535 /* ReviewsController.swift */,
 				99724C2C22418D6000204535 /* HoriztonalSnappingController.swift */,
-				99724C11223DF43300204535 /* Search */,
-				99724C0C223DF21800204535 /* Apps */,
+				99724C4522436C8E00204535 /* App Detail */,
+				99724C11223DF43300204535 /* Search Page */,
+				99724C0C223DF21800204535 /* Apps Page */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

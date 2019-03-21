@@ -77,7 +77,7 @@ class SearchController: BaseListController, UISearchBarDelegate {
         
         Service.shared.fetchApps(fromSearchQuery: query) { (results, error) in
             if let error = error {
-                print("Failed to retrieve apps: \(error)")
+                print("Failed to retrieve JSON: \(error)")
                 return
             }
             
