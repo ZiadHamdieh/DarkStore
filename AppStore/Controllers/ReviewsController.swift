@@ -17,6 +17,7 @@ class ReviewsController: HorizontalSnappingController, UICollectionViewDelegateF
         
         collectionView.backgroundColor = .white
         collectionView.register(ReviewCell.self, forCellWithReuseIdentifier: reviewCellId)
+        collectionView.contentInset = .init(top: 0, left: 16, bottom: 50, right: 16)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -29,6 +30,10 @@ class ReviewsController: HorizontalSnappingController, UICollectionViewDelegateF
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: view.frame.width, height: view.frame.height)
+        return .init(width: view.frame.width - 48, height: view.frame.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 20
     }
 }
