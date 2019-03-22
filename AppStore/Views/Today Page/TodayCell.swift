@@ -10,11 +10,17 @@ import UIKit
 
 class TodayCell: UICollectionViewCell {
     
+    let imageView = UIImageView(image: #imageLiteral(resourceName: "star"))
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         backgroundColor = .white
-        layer.cornerRadius = 15
+        layer.cornerRadius = 18
+        
+        addSubview(imageView)
+        imageView.contentMode = .scaleAspectFit
+        imageView.centerInSuperview(size: .init(width: 200, height: 200))
     }
     
     required init?(coder aDecoder: NSCoder) {

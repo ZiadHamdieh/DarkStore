@@ -45,6 +45,9 @@
 		99DC2E8D223A2B9200FA46EA /* VerticalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DC2E8C223A2B9200FA46EA /* VerticalStackView.swift */; };
 		99DC2E8F223C639800FA46EA /* AppSearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DC2E8E223C639800FA46EA /* AppSearchResults.swift */; };
 		99DC2E92223C73FD00FA46EA /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DC2E91223C73FD00FA46EA /* Service.swift */; };
+		99F0285B22447880002A5952 /* TodayDetailAppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F0285A22447880002A5952 /* TodayDetailAppController.swift */; };
+		99F0285D2244B83E002A5952 /* TodayAppDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F0285C2244B83E002A5952 /* TodayAppDescriptionCell.swift */; };
+		99F0285F2244C798002A5952 /* TodayAppHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F0285E2244C798002A5952 /* TodayAppHeaderCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +91,9 @@
 		99DC2E8C223A2B9200FA46EA /* VerticalStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalStackView.swift; sourceTree = "<group>"; };
 		99DC2E8E223C639800FA46EA /* AppSearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchResults.swift; sourceTree = "<group>"; };
 		99DC2E91223C73FD00FA46EA /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		99F0285A22447880002A5952 /* TodayDetailAppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayDetailAppController.swift; sourceTree = "<group>"; };
+		99F0285C2244B83E002A5952 /* TodayAppDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayAppDescriptionCell.swift; sourceTree = "<group>"; };
+		99F0285E2244C798002A5952 /* TodayAppHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayAppHeaderCell.swift; sourceTree = "<group>"; };
 		D22DEAFB6245F819EBB98488 /* Pods-AppStore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStore.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppStore/Pods-AppStore.debug.xcconfig"; sourceTree = "<group>"; };
 		EB436F0E99115F8F37BA63BF /* Pods-AppStore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStore.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppStore/Pods-AppStore.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -185,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				99724C472243763000204535 /* TodayPageController.swift */,
+				99F0285A22447880002A5952 /* TodayDetailAppController.swift */,
 			);
 			path = "Today Page";
 			sourceTree = "<group>";
@@ -193,6 +200,8 @@
 			isa = PBXGroup;
 			children = (
 				99724C4A224376E600204535 /* TodayCell.swift */,
+				99F0285C2244B83E002A5952 /* TodayAppDescriptionCell.swift */,
+				99F0285E2244C798002A5952 /* TodayAppHeaderCell.swift */,
 			);
 			path = "Today Page";
 			sourceTree = "<group>";
@@ -421,6 +430,7 @@
 				99724C23223F72EB00204535 /* AppsPageHeader.swift in Sources */,
 				99724C19223DFDFC00204535 /* UIView+Layout.swift in Sources */,
 				99724C0E223DF22700204535 /* AppsPageController.swift in Sources */,
+				99F0285B22447880002A5952 /* TodayDetailAppController.swift in Sources */,
 				99724C17223DF8A600204535 /* UILabelExtension.swift in Sources */,
 				99724C3A22420DCF00204535 /* PreviewScreenshotController.swift in Sources */,
 				99724C3E22421CC500204535 /* AppReviewsCell.swift in Sources */,
@@ -428,7 +438,9 @@
 				99724C2922406CD400204535 /* AppGroup.swift in Sources */,
 				99724C482243763000204535 /* TodayPageController.swift in Sources */,
 				99724C342241F38D00204535 /* AppDetailCell.swift in Sources */,
+				99F0285F2244C798002A5952 /* TodayAppHeaderCell.swift in Sources */,
 				99724C362241FDA600204535 /* UIStackViewExtension.swift in Sources */,
+				99F0285D2244B83E002A5952 /* TodayAppDescriptionCell.swift in Sources */,
 				99724C27223F78AA00204535 /* AppsPageHeaderCell.swift in Sources */,
 				99724C1B223DFF4D00204535 /* AppsHorizontalController.swift in Sources */,
 				99724C42224221B100204535 /* ReviewCell.swift in Sources */,
