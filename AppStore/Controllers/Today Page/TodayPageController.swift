@@ -12,22 +12,27 @@ class TodayPageController: BaseListController {
     
     let cellId = "cellId"
     
+    let items = [
+        TodayItem.init(category: "LIFE HACK", title: "UTILIZING YOUR TIME", image: #imageLiteral(resourceName: "garden"), summary: "ajdlkajdlakdjkalsdjksdjkaldjaskljaskldjaldjaslkdjakldjkl", backgroundColor: .white),
+        TodayItem.init(category: "HOLIDAYS", title: "TRAVEL ON A BUDGET", image: #imageLiteral(resourceName: "holiday"), summary: "Find out all about how you need to travel without packing", backgroundColor: #colorLiteral(red: 0.9862952828, green: 0.9632481933, blue: 0.7315776944, alpha: 1))]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationController?.isNavigationBarHidden = true
         
-        collectionView.backgroundColor = #colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)
+        collectionView.backgroundColor = #colorLiteral(red: 0.9538187385, green: 0.948759377, blue: 0.957450211, alpha: 1)
         
         collectionView.register(TodayCell.self, forCellWithReuseIdentifier: cellId)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return items.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! TodayCell
+        cell.todayItem = items[indexPath.row]
         return cell
     }
     
@@ -51,8 +56,11 @@ class TodayPageController: BaseListController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let todayAppController = TodayDetailAppController()
+        todayAppController.dismissHandler = {
+            self.handleRemoveView()
+        }
         todayAppController.view.layer.cornerRadius = 15
-        todayAppController.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleRemoveRedView)))
+        todayAppController.todayItem = items[indexPath.row]
         view.addSubview(todayAppController.view)
         addChild(todayAppController)
         self.todayAppController = todayAppController
@@ -88,10 +96,7 @@ class TodayPageController: BaseListController {
     
     var startingFrame: CGRect?
     
-    @objc fileprivate func handleRemoveRedView(gesture: UITapGestureRecognizer) {
-        
-        
-        
+    @objc fileprivate func handleRemoveView() {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
             
             self.todayAppController.tableView.contentOffset = .zero
@@ -106,7 +111,7 @@ class TodayPageController: BaseListController {
             
             self.tabBarController?.tabBar.transform = .identity
         }, completion: { _ in
-            gesture.view?.removeFromSuperview()
+//            gesture.view?.removeFromSuperview()
             self.todayAppController.removeFromParent()
         })
     }

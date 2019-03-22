@@ -48,6 +48,7 @@
 		99F0285B22447880002A5952 /* TodayDetailAppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F0285A22447880002A5952 /* TodayDetailAppController.swift */; };
 		99F0285D2244B83E002A5952 /* TodayAppDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F0285C2244B83E002A5952 /* TodayAppDescriptionCell.swift */; };
 		99F0285F2244C798002A5952 /* TodayAppHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F0285E2244C798002A5952 /* TodayAppHeaderCell.swift */; };
+		99F0286122457D48002A5952 /* TodayItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F0286022457D48002A5952 /* TodayItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +95,7 @@
 		99F0285A22447880002A5952 /* TodayDetailAppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayDetailAppController.swift; sourceTree = "<group>"; };
 		99F0285C2244B83E002A5952 /* TodayAppDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayAppDescriptionCell.swift; sourceTree = "<group>"; };
 		99F0285E2244C798002A5952 /* TodayAppHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayAppHeaderCell.swift; sourceTree = "<group>"; };
+		99F0286022457D48002A5952 /* TodayItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayItem.swift; sourceTree = "<group>"; };
 		D22DEAFB6245F819EBB98488 /* Pods-AppStore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStore.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppStore/Pods-AppStore.debug.xcconfig"; sourceTree = "<group>"; };
 		EB436F0E99115F8F37BA63BF /* Pods-AppStore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStore.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppStore/Pods-AppStore.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -267,6 +269,7 @@
 		99DC2E842238D6B900FA46EA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				99F0286022457D48002A5952 /* TodayItem.swift */,
 				99724C2822406CD400204535 /* AppGroup.swift */,
 				99DC2E8E223C639800FA46EA /* AppSearchResults.swift */,
 				99724C2A2240BAC000204535 /* HeaderResult.swift */,
@@ -417,6 +420,7 @@
 				99724C1F223F68BE00204535 /* UIImageViewExtension.swift in Sources */,
 				99724C2F224199D400204535 /* CollectionViewSnappingBehaviour.swift in Sources */,
 				99DC2E712238D17A00FA46EA /* AppDelegate.swift in Sources */,
+				99F0286122457D48002A5952 /* TodayItem.swift in Sources */,
 				99DC2E8F223C639800FA46EA /* AppSearchResults.swift in Sources */,
 				99DC2E8D223A2B9200FA46EA /* VerticalStackView.swift in Sources */,
 				99724C21223F69CA00204535 /* UIButtonExtension.swift in Sources */,

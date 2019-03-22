@@ -12,6 +12,10 @@ class TodayDetailAppController: UITableViewController {
     
     let cellId = "cellId"
     
+    var todayItem: TodayItem?
+    
+    var dismissHandler: (() -> ())?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,7 +25,6 @@ class TodayDetailAppController: UITableViewController {
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
-        
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -29,7 +32,19 @@ class TodayDetailAppController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            let headerCell = TodayAppHeaderCell()
+            headerCell.closeButton.addTarget(self, action: #selector(handleDismiss), for: .touchUpInside)
+            headerCell.todayCell.todayItem = todayItem
+            return headerCell
+        }
+        //TODO Fix this
         return (indexPath.row == 0) ? TodayAppHeaderCell(): TodayAppDescriptionCell()
+    }
+    
+    @objc fileprivate func handleDismiss(sender: UIButton) {
+        sender.isHidden = true
+        dismissHandler?()
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

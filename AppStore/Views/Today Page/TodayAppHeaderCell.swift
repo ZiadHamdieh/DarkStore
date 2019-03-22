@@ -14,7 +14,7 @@ class TodayAppHeaderCell: UITableViewCell {
     
     let closeButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(#imageLiteral(resourceName: "star"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "close_button"), for: .normal)
         return button
     }()
     
@@ -25,7 +25,7 @@ class TodayAppHeaderCell: UITableViewCell {
         todayCell.fillSuperview()
         
         addSubview(closeButton)
-        closeButton.anchor(top: topAnchor, leading: nil, bottom: nil, trailing: trailingAnchor, padding: .zero, size: .init(width: 80, height: 35))
+        closeButton.anchor(top: topAnchor, leading: nil, bottom: nil, trailing: trailingAnchor, padding: .init(top: 20, left: 0, bottom: 0, right: 12), size: .init(width: 80, height: 35))
      }
     
     required init?(coder aDecoder: NSCoder) {
