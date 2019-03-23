@@ -165,6 +165,8 @@ class TodayPageController: BaseListController, UIGestureRecognizerDelegate {
         present(BackEnabledNavigationController(rootViewController: fullViewController), animated: true, completion: nil)
     }
     
+    var appFullScreenBeginOffset: CGFloat = 0
+    
     fileprivate func setupSingleFullScreenController(_ indexPath: IndexPath) {
         let todayAppController = TodayDetailAppController()
         todayAppController.dismissHandler = {
@@ -179,21 +181,27 @@ class TodayPageController: BaseListController, UIGestureRecognizerDelegate {
         // setup pan gesture to dismiss controller
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(handleDrag))
         todayAppController.view.addGestureRecognizer(gesture)
+        gesture.delegate = self
         
         // pan gesture should not interfere with scrolling in the tableView
         
     }
     
     @objc fileprivate func handleDrag(gesture: UIPanGestureRecognizer) {
-        let translationY = gesture.translation(in: todayAppController.view).y
-        gesture.delegate = self
+        if gesture.state == .began {
+            appFullScreenBeginOffset = todayAppController.tableView.contentOffset.y
+        }
         
         // Do not use the gesture if the tableView's content is scrolled down
         if todayAppController.tableView.contentOffset.y > 0 { return }
         
+        let translationY = gesture.translation(in: todayAppController.view).y
+        
         if translationY > 0 {
             if gesture.state == .changed {
-                let scale = max(1 - translationY / 1000, 0.5)
+                let actualOffset = translationY - appFullScreenBeginOffset
+                
+                let scale = min(1, max(0.5, 1 - actualOffset / 1000))
                 let transform: CGAffineTransform = .init(scaleX: scale, y: scale)
                 
                 todayAppController.view.transform = transform
@@ -284,8 +292,9 @@ class TodayPageController: BaseListController, UIGestureRecognizerDelegate {
             guard let cell = self.todayAppController.tableView.cellForRow(at: [0,0]) as? TodayAppHeaderCell else {
                 return
             }
+            cell.closeButton.alpha = 0
             cell.todayCell.topConstraint.constant = 24
-            
+            cell.layoutIfNeeded()
             
         }, completion: { _ in
             self.todayAppController.removeFromParent()
