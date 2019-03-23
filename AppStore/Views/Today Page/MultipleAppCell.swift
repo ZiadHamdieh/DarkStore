@@ -1,14 +1,22 @@
 //
-//  AppRowsCell.swift
+//  MultipleAppCell.swift
 //  AppStore
 //
-//  Created by Ziad Hamdieh on 2019-03-18.
+//  Created by Ziad Hamdieh on 2019-03-22.
 //  Copyright © 2019 Ziad Hamdieh. All rights reserved.
 //
 
 import UIKit
 
-class AppRowCell: UICollectionViewCell {
+class MultipleAppCell: UICollectionViewCell {
+    
+    var app: FeedResult! {
+        didSet {
+            appNameLabel.text = app.name
+            appAuthorLabel.text = app.artistName
+            appImageView.sd_setImage(with: URL(string: app.artworkUrl100))
+        }
+    }
     
     let appImageView = UIImageView(cornerRadius: 12)
     
@@ -22,12 +30,13 @@ class AppRowCell: UICollectionViewCell {
         view.backgroundColor = UIColor(white: 0.3, alpha: 0.3)
         return view
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         appImageView.widthAnchor.constraint(equalToConstant: 64).isActive = true
         appImageView.heightAnchor.constraint(equalToConstant: 64).isActive = true
+        appImageView.image = #imageLiteral(resourceName: "garden")
         
         getButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
         getButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
@@ -52,7 +61,6 @@ class AppRowCell: UICollectionViewCell {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError()
     }
-    
 }
