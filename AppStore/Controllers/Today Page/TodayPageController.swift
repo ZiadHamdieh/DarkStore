@@ -188,14 +188,15 @@ class TodayPageController: BaseListController, UIGestureRecognizerDelegate {
         let translationY = gesture.translation(in: todayAppController.view).y
         gesture.delegate = self
         
-        if gesture.state == .changed {
-            let scale = max(1 - translationY / 1000, 0.5)
-            let transform: CGAffineTransform = .init(scaleX: scale, y: scale)
-            
-            todayAppController.view.transform = transform
-        } else if gesture.state == .ended {
-            handleAppFullScreenDismissal()
-            
+        if translationY > 0 {
+            if gesture.state == .changed {
+                let scale = max(1 - translationY / 1000, 0.5)
+                let transform: CGAffineTransform = .init(scaleX: scale, y: scale)
+                
+                todayAppController.view.transform = transform
+            } else if gesture.state == .ended {
+                handleAppFullScreenDismissal()
+            }
         }
     }
     
