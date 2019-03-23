@@ -16,6 +16,14 @@ class TodayDetailAppController: UITableViewController {
     
     var dismissHandler: (() -> ())?
     
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y < 0 {
+            // disable scrolling temporarily and re-enable it immediately
+            scrollView.isScrollEnabled.toggle()
+            scrollView.isScrollEnabled.toggle()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
