@@ -12,6 +12,7 @@ class TodayMultipleAppsController: BaseListController {
     
     fileprivate let cellId = "cellId"
     
+    override var prefersStatusBarHidden: Bool { return true }
     
     var results = [FeedResult]()
     
@@ -44,12 +45,12 @@ class TodayMultipleAppsController: BaseListController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        collectionView.isScrollEnabled = (mode == .fullScreen)
+        collectionView.backgroundColor = .white
+        
         if mode == .fullScreen {
             setupCloseButton()
         }
-        
-        collectionView.backgroundColor = .white
-        collectionView.isScrollEnabled = false
         
         collectionView.register(MultipleAppCell.self, forCellWithReuseIdentifier: cellId)
     }
@@ -67,7 +68,7 @@ class TodayMultipleAppsController: BaseListController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return min(results.count, 4)
+        return (mode == .fullScreen) ? results.count : min(results.count, 4)
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -77,16 +78,33 @@ class TodayMultipleAppsController: BaseListController {
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let appId = results[indexPath.item].id
+        let appController = AppDetailController(appId: appId)
+//        navigationController?.pushViewController(appController, animated: true)
+        present(appController, animated: true, completion: nil)
+        print("click")
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let height: CGFloat = 74
+        let fullScreenWidth = view.frame.width - 48
+        let smallWidth = view.frame.width
         
-        return .init(width: view.frame.width, height: height)
+        return (mode == .fullScreen) ?
+            .init(width: fullScreenWidth, height: height) :
+            .init(width: smallWidth, height: height)
     }
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return cellSpacing
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return (mode == .fullScreen) ? .init(top: 12, left: 24, bottom: 12, right: 24) : .zero
     }
     
 }
