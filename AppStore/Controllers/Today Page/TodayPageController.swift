@@ -22,12 +22,6 @@ class TodayPageController: BaseListController {
     
     fileprivate var items = [TodayItem]()
     
-//    fileprivate var items = [
-//        TodayItem.init(category: "THE DAILY LIST", title: "Test-Drive These CarPlay Apps", image: #imageLiteral(resourceName: "garden"), summary: "ajdlkajdlakdjkalsdjksdjkaldjaskljaskldjaldjaslkdjakldjkl", backgroundColor: .white, cellType: .multipleApp),
-//        TodayItem.init(category: "LIFE HACK", title: "TRAVEL ON A BUDGET", image: #imageLiteral(resourceName: "garden"), summary: "Find out all about how you need to travel without packing", backgroundColor: #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1), cellType: .singleApp),
-//        TodayItem.init(category: "HOLIDAYS", title: "TRAVEL ON A BUDGET", image: #imageLiteral(resourceName: "holiday"), summary: "Find out all about how you need to travel without packing", backgroundColor: #colorLiteral(red: 0.9862952828, green: 0.9632481933, blue: 0.7315776944, alpha: 1), cellType: .singleApp)
-//        ]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -83,16 +77,20 @@ class TodayPageController: BaseListController {
         }
         
         dispatchGroup.notify(queue: .main) {
-             if let group = topGrossingGroup {
+            self.items.append(TodayItem.init(category: "LIFE HACK", title: "TRAVEL ON A BUDGET", image: #imageLiteral(resourceName: "garden"), summary: "Find out all about how you need to travel without packing", backgroundColor: #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1), apps: nil, cellType: .singleApp))
+            
+            if let group = topGrossingGroup {
                 let newItem = TodayItem.init(category: "DAILY LIST", title: group.feed.title, image: #imageLiteral(resourceName: "close_button"), summary: "", backgroundColor: .white, apps: group.feed.results, cellType: .multipleApp)
                 self.items.append(newItem)
             }
+            self.items.append(TodayItem.init(category: "HOLIDAYS", title: "TRAVEL ON A BUDGET", image: #imageLiteral(resourceName: "holiday"), summary: "Find out all about how you need to travel without packing", backgroundColor: #colorLiteral(red: 0.9862952828, green: 0.9632481933, blue: 0.7315776944, alpha: 1), apps: nil, cellType: .singleApp))
+            self.spinner.stopAnimating()
+            self.collectionView.reloadData()
+            
             if let group = gamesGroup {
                 let newItem = TodayItem.init(category: "DAILY LIST", title: group.feed.title, image: #imageLiteral(resourceName: "close_button"), summary: "", backgroundColor: .white, apps: group.feed.results, cellType: .multipleApp)
                 self.items.append(newItem)
             }
-            self.spinner.stopAnimating()
-            self.collectionView.reloadData()
         }
         
     }
@@ -105,7 +103,31 @@ class TodayPageController: BaseListController {
         let cellId = items[indexPath.item].cellType.rawValue
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! BaseTodayCell
         cell.todayItem = items[indexPath.item]
+        
+        (cell as? TodayMultipleAppCell)?.multipleAppsController.collectionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleMultipleAppsTap)))
+        
         return cell
+    }
+    
+    @objc fileprivate func handleMultipleAppsTap(sender: UIGestureRecognizer) {
+        
+        let collectionView = sender.view
+        
+        // figure out which cell we are clicking into
+        var superview = collectionView?.superview
+        while superview != nil {
+            if let cell = superview as? TodayMultipleAppCell {
+                guard let indexPath = self.collectionView.indexPath(for: cell) else { return }
+                
+                let apps = self.items[indexPath.row].apps
+                
+                let fullScreenController = TodayMultipleAppsController(mode: .fullScreen)
+                fullScreenController.apps = apps ?? []
+                present(BackEnabledNavigationController(rootViewController: fullScreenController), animated: true)
+            }
+            superview = superview?.superview
+        }
+
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -130,7 +152,7 @@ class TodayPageController: BaseListController {
         
         if items[indexPath.item].cellType == .multipleApp {
             let fullViewController = TodayMultipleAppsController(mode: .fullScreen)
-            fullViewController.apps = items[indexPath.item].apps
+            fullViewController.apps = items[indexPath.item].apps ?? []
             present(BackEnabledNavigationController(rootViewController: fullViewController), animated: true, completion: nil)
             return
         }

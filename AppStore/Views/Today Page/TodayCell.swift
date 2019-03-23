@@ -31,11 +31,11 @@ class TodayCell: BaseTodayCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .white
         layer.cornerRadius = 18
-        clipsToBounds = true
+//        clipsToBounds = true
         
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         
         let imageContainerView = UIView()
         imageContainerView.addSubview(imageView)

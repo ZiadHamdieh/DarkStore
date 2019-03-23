@@ -15,12 +15,12 @@ class TodayMultipleAppCell: BaseTodayCell {
             categoryLabel.text = todayItem.category
             titleLabel.text = todayItem.title
             
-            multipleAppsController.apps = todayItem.apps
+            multipleAppsController.apps = todayItem.apps ?? []
             multipleAppsController.collectionView.reloadData()
         }
     }
     
-    let categoryLabel = UILabel(text: "THE DAILY LIST", font: .systemFont(ofSize: 20))
+    let categoryLabel = UILabel(text: "THE DAILY LIST", font: .boldSystemFont(ofSize: 20))
     let titleLabel = UILabel(text: "Test-Drive These CarPlay Apps", font: .boldSystemFont(ofSize: 28), numberOfLines: 2)
     let multipleAppsController = TodayMultipleAppsController(mode: .small)
     
@@ -28,7 +28,6 @@ class TodayMultipleAppCell: BaseTodayCell {
         super.init(frame: frame)
         
         backgroundColor = .white
-        layer.cornerRadius = 15
                 
         let stackView = VerticalStackView(arrangedSubviews: [
             categoryLabel,
