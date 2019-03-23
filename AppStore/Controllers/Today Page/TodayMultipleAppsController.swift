@@ -14,7 +14,7 @@ class TodayMultipleAppsController: BaseListController {
     
     override var prefersStatusBarHidden: Bool { return true }
     
-    var results = [FeedResult]()
+    var apps = [FeedResult]()
     
     let closeButton: UIButton = {
         let button = UIButton(type: .system)
@@ -50,6 +50,7 @@ class TodayMultipleAppsController: BaseListController {
         
         if mode == .fullScreen {
             setupCloseButton()
+            navigationController?.isNavigationBarHidden = true
         }
         
         collectionView.register(MultipleAppCell.self, forCellWithReuseIdentifier: cellId)
@@ -68,23 +69,21 @@ class TodayMultipleAppsController: BaseListController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (mode == .fullScreen) ? results.count : min(results.count, 4)
+        return (mode == .fullScreen) ? apps.count : min(apps.count, 4)
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MultipleAppCell
         // triggers the property observer in MultipleAppCell.swift
-        cell.app = results[indexPath.item]
+        cell.app = apps[indexPath.item]
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let appId = results[indexPath.item].id
+        let appId = apps[indexPath.item].id
         let appController = AppDetailController(appId: appId)
-//        navigationController?.pushViewController(appController, animated: true)
-        present(appController, animated: true, completion: nil)
-        print("click")
+        navigationController?.pushViewController(appController, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -53,6 +53,7 @@
 		99F028652245CD79002A5952 /* BaseTodayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F028642245CD79002A5952 /* BaseTodayCell.swift */; };
 		99F028672245CF32002A5952 /* TodayMultipleAppsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F028662245CF32002A5952 /* TodayMultipleAppsController.swift */; };
 		99F028692245CFE8002A5952 /* MultipleAppCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F028682245CFE8002A5952 /* MultipleAppCell.swift */; };
+		99F0286B2245F606002A5952 /* backEnabledNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F0286A2245F606002A5952 /* backEnabledNavigationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +105,7 @@
 		99F028642245CD79002A5952 /* BaseTodayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTodayCell.swift; sourceTree = "<group>"; };
 		99F028662245CF32002A5952 /* TodayMultipleAppsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayMultipleAppsController.swift; sourceTree = "<group>"; };
 		99F028682245CFE8002A5952 /* MultipleAppCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleAppCell.swift; sourceTree = "<group>"; };
+		99F0286A2245F606002A5952 /* backEnabledNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = backEnabledNavigationController.swift; sourceTree = "<group>"; };
 		D22DEAFB6245F819EBB98488 /* Pods-AppStore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStore.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppStore/Pods-AppStore.debug.xcconfig"; sourceTree = "<group>"; };
 		EB436F0E99115F8F37BA63BF /* Pods-AppStore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStore.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppStore/Pods-AppStore.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -203,6 +205,7 @@
 				99724C472243763000204535 /* TodayPageController.swift */,
 				99F0285A22447880002A5952 /* TodayDetailAppController.swift */,
 				99F028662245CF32002A5952 /* TodayMultipleAppsController.swift */,
+				99F0286A2245F606002A5952 /* backEnabledNavigationController.swift */,
 			);
 			path = "Today Page";
 			sourceTree = "<group>";
@@ -459,6 +462,7 @@
 				99724C482243763000204535 /* TodayPageController.swift in Sources */,
 				99724C342241F38D00204535 /* AppDetailCell.swift in Sources */,
 				99F0285F2244C798002A5952 /* TodayAppHeaderCell.swift in Sources */,
+				99F0286B2245F606002A5952 /* backEnabledNavigationController.swift in Sources */,
 				99724C362241FDA600204535 /* UIStackViewExtension.swift in Sources */,
 				99F0285D2244B83E002A5952 /* TodayAppDescriptionCell.swift in Sources */,
 				99724C27223F78AA00204535 /* AppsPageHeaderCell.swift in Sources */,

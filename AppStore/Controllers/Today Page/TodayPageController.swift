@@ -130,10 +130,8 @@ class TodayPageController: BaseListController {
         
         if items[indexPath.item].cellType == .multipleApp {
             let fullViewController = TodayMultipleAppsController(mode: .fullScreen)
-            fullViewController.results = items[indexPath.item].apps
-//            fullViewController.collectionView.isScrollEnabled = true
-            present(fullViewController, animated: true, completion: nil)
-//            navigationController?.pushViewController(fullViewController, animated: true)
+            fullViewController.apps = items[indexPath.item].apps
+            present(BackEnabledNavigationController(rootViewController: fullViewController), animated: true, completion: nil)
             return
         }
         
