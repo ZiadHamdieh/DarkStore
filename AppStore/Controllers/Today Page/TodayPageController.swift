@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TodayPageController: BaseListController {
+class TodayPageController: BaseListController, UIGestureRecognizerDelegate {
     
     fileprivate let spinner: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(style: .whiteLarge)
@@ -22,12 +22,18 @@ class TodayPageController: BaseListController {
     
     fileprivate var items = [TodayItem]()
     
+    fileprivate let blurVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationController?.isNavigationBarHidden = true
         
         collectionView.backgroundColor = #colorLiteral(red: 0.9538187385, green: 0.948759377, blue: 0.957450211, alpha: 1)
+        
+        view.addSubview(blurVisualEffectView)
+        blurVisualEffectView.fillSuperview()
+        blurVisualEffectView.alpha = 0
         
         view.addSubview(spinner)
         spinner.centerInSuperview()
@@ -162,12 +168,39 @@ class TodayPageController: BaseListController {
     fileprivate func setupSingleFullScreenController(_ indexPath: IndexPath) {
         let todayAppController = TodayDetailAppController()
         todayAppController.dismissHandler = {
-            self.handleRemoveView()
+            self.handleAppFullScreenDismissal()
         }
         
         todayAppController.view.layer.cornerRadius = 15
         todayAppController.todayItem = items[indexPath.row]
         self.todayAppController = todayAppController
+        blurVisualEffectView.alpha = 1
+        
+        // setup pan gesture to dismiss controller
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(handleDrag))
+        todayAppController.view.addGestureRecognizer(gesture)
+        
+        // pan gesture should not interfere with scrolling in the tableView
+        
+    }
+    
+    @objc fileprivate func handleDrag(gesture: UIPanGestureRecognizer) {
+        let translationY = gesture.translation(in: todayAppController.view).y
+        gesture.delegate = self
+        
+        if gesture.state == .changed {
+            let scale = max(1 - translationY / 1000, 0.5)
+            let transform: CGAffineTransform = .init(scaleX: scale, y: scale)
+            
+            todayAppController.view.transform = transform
+        } else if gesture.state == .ended {
+            handleAppFullScreenDismissal()
+            
+        }
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
     
     var anchoredConstraints: AnchoredConstraints?
@@ -226,8 +259,11 @@ class TodayPageController: BaseListController {
     
     var startingFrame: CGRect?
     
-    @objc fileprivate func handleRemoveView() {
+    @objc fileprivate func handleAppFullScreenDismissal() {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
+            
+            self.blurVisualEffectView.alpha = 0
+            self.todayAppController.view.transform = .identity
             
             self.todayAppController.tableView.contentOffset = .zero
             
@@ -245,6 +281,7 @@ class TodayPageController: BaseListController {
                 return
             }
             cell.todayCell.topConstraint.constant = 24
+            
             
         }, completion: { _ in
             self.todayAppController.removeFromParent()
