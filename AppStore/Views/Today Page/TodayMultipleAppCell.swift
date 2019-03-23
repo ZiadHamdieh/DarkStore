@@ -22,7 +22,7 @@ class TodayMultipleAppCell: BaseTodayCell {
     
     let categoryLabel = UILabel(text: "THE DAILY LIST", font: .systemFont(ofSize: 20))
     let titleLabel = UILabel(text: "Test-Drive These CarPlay Apps", font: .boldSystemFont(ofSize: 28), numberOfLines: 2)
-    let multipleAppsController = TodayMultipleAppsController()
+    let multipleAppsController = TodayMultipleAppsController(mode: .small)
     
     override init(frame: CGRect) {
         super.init(frame: frame)

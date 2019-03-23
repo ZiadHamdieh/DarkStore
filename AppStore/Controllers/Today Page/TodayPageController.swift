@@ -121,6 +121,16 @@ class TodayPageController: BaseListController {
     var heightConstraint: NSLayoutConstraint?
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if items[indexPath.item].cellType == .multipleApp {
+            let fullViewController = TodayMultipleAppsController(mode: .fullScreen)
+            fullViewController.results = items[indexPath.item].apps
+//            fullViewController.collectionView.isScrollEnabled = true
+            present(fullViewController, animated: true, completion: nil)
+//            navigationController?.pushViewController(fullViewController, animated: true)
+            return
+        }
+        
         let todayAppController = TodayDetailAppController()
         todayAppController.dismissHandler = {
             self.handleRemoveView()
