@@ -10,11 +10,16 @@ import UIKit
 
 class TodayPageController: BaseListController {
     
-    let cellId = "cellId"
+//    fileprivate let cellId = "cellId"
+//    fileprivate let multipleAppCellId = "multipleAppsCellId"
+    
+    static let cellHeight: CGFloat = 500
     
     let items = [
-        TodayItem.init(category: "LIFE HACK", title: "UTILIZING YOUR TIME", image: #imageLiteral(resourceName: "garden"), summary: "ajdlkajdlakdjkalsdjksdjkaldjaskljaskldjaldjaslkdjakldjkl", backgroundColor: .white),
-        TodayItem.init(category: "HOLIDAYS", title: "TRAVEL ON A BUDGET", image: #imageLiteral(resourceName: "holiday"), summary: "Find out all about how you need to travel without packing", backgroundColor: #colorLiteral(red: 0.9862952828, green: 0.9632481933, blue: 0.7315776944, alpha: 1))]
+        TodayItem.init(category: "THE DAILY LIST", title: "Test-Drive These CarPlay Apps", image: #imageLiteral(resourceName: "garden"), summary: "ajdlkajdlakdjkalsdjksdjkaldjaskljaskldjaldjaslkdjakldjkl", backgroundColor: .white, cellType: .multipleApp),
+        TodayItem.init(category: "LIFE HACK", title: "TRAVEL ON A BUDGET", image: #imageLiteral(resourceName: "garden"), summary: "Find out all about how you need to travel without packing", backgroundColor: #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1), cellType: .singleApp),
+        TodayItem.init(category: "HOLIDAYS", title: "TRAVEL ON A BUDGET", image: #imageLiteral(resourceName: "holiday"), summary: "Find out all about how you need to travel without packing", backgroundColor: #colorLiteral(red: 0.9862952828, green: 0.9632481933, blue: 0.7315776944, alpha: 1), cellType: .singleApp)
+        ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +28,8 @@ class TodayPageController: BaseListController {
         
         collectionView.backgroundColor = #colorLiteral(red: 0.9538187385, green: 0.948759377, blue: 0.957450211, alpha: 1)
         
-        collectionView.register(TodayCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(TodayCell.self, forCellWithReuseIdentifier: TodayItem.cellType.singleApp.rawValue)
+        collectionView.register(TodayMultipleAppCell.self, forCellWithReuseIdentifier: TodayItem.cellType.multipleApp.rawValue)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -31,13 +37,14 @@ class TodayPageController: BaseListController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! TodayCell
-        cell.todayItem = items[indexPath.row]
+        let cellId = items[indexPath.item].cellType.rawValue
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! BaseTodayCell
+        cell.todayItem = items[indexPath.item]
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: 0.9 * view.frame.width, height: 400)
+        return .init(width: 0.9 * view.frame.width, height: TodayPageController.cellHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -124,7 +131,6 @@ class TodayPageController: BaseListController {
             cell.todayCell.topConstraint.constant = 24
             
         }, completion: { _ in
-//            gesture.view?.removeFromSuperview()
             self.todayAppController.removeFromParent()
             self.todayAppController.view.removeFromSuperview()
             self.collectionView.isUserInteractionEnabled = true
