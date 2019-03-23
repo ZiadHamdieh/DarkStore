@@ -44,6 +44,12 @@ class TodayPageController: BaseListController {
         fetchApps()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // fixes bug where tabBar moves out of place after view re-appears
+        tabBarController?.tabBar.superview?.setNeedsLayout()
+    }
+    
     fileprivate func fetchApps() {
         
         var topGrossingGroup: AppGroup?
