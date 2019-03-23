@@ -10,16 +10,23 @@ import UIKit
 
 class TodayPageController: BaseListController {
     
-//    fileprivate let cellId = "cellId"
-//    fileprivate let multipleAppCellId = "multipleAppsCellId"
+    fileprivate let spinner: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(style: .whiteLarge)
+        view.color = .darkGray
+        view.startAnimating()
+        view.hidesWhenStopped = true
+        return view
+    }()
     
     static let cellHeight: CGFloat = 500
     
-    let items = [
-        TodayItem.init(category: "THE DAILY LIST", title: "Test-Drive These CarPlay Apps", image: #imageLiteral(resourceName: "garden"), summary: "ajdlkajdlakdjkalsdjksdjkaldjaskljaskldjaldjaslkdjakldjkl", backgroundColor: .white, cellType: .multipleApp),
-        TodayItem.init(category: "LIFE HACK", title: "TRAVEL ON A BUDGET", image: #imageLiteral(resourceName: "garden"), summary: "Find out all about how you need to travel without packing", backgroundColor: #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1), cellType: .singleApp),
-        TodayItem.init(category: "HOLIDAYS", title: "TRAVEL ON A BUDGET", image: #imageLiteral(resourceName: "holiday"), summary: "Find out all about how you need to travel without packing", backgroundColor: #colorLiteral(red: 0.9862952828, green: 0.9632481933, blue: 0.7315776944, alpha: 1), cellType: .singleApp)
-        ]
+    fileprivate var items = [TodayItem]()
+    
+//    fileprivate var items = [
+//        TodayItem.init(category: "THE DAILY LIST", title: "Test-Drive These CarPlay Apps", image: #imageLiteral(resourceName: "garden"), summary: "ajdlkajdlakdjkalsdjksdjkaldjaskljaskldjaldjaslkdjakldjkl", backgroundColor: .white, cellType: .multipleApp),
+//        TodayItem.init(category: "LIFE HACK", title: "TRAVEL ON A BUDGET", image: #imageLiteral(resourceName: "garden"), summary: "Find out all about how you need to travel without packing", backgroundColor: #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1), cellType: .singleApp),
+//        TodayItem.init(category: "HOLIDAYS", title: "TRAVEL ON A BUDGET", image: #imageLiteral(resourceName: "holiday"), summary: "Find out all about how you need to travel without packing", backgroundColor: #colorLiteral(red: 0.9862952828, green: 0.9632481933, blue: 0.7315776944, alpha: 1), cellType: .singleApp)
+//        ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +35,60 @@ class TodayPageController: BaseListController {
         
         collectionView.backgroundColor = #colorLiteral(red: 0.9538187385, green: 0.948759377, blue: 0.957450211, alpha: 1)
         
+        view.addSubview(spinner)
+        spinner.centerInSuperview()
+        
         collectionView.register(TodayCell.self, forCellWithReuseIdentifier: TodayItem.cellType.singleApp.rawValue)
         collectionView.register(TodayMultipleAppCell.self, forCellWithReuseIdentifier: TodayItem.cellType.multipleApp.rawValue)
+        
+        fetchApps()
+    }
+    
+    fileprivate func fetchApps() {
+        
+        var topGrossingGroup: AppGroup?
+        var gamesGroup: AppGroup?
+        
+        let dispatchGroup = DispatchGroup()
+        
+        dispatchGroup.enter()
+        Service.shared.fetchTopGrossing { (appGroup, error) in
+            if let error = error {
+                print("Failed to fetch top grossing in today controller: ", error)
+                return
+            }
+                
+                guard let appGroup = appGroup else { return }
+                topGrossingGroup = appGroup
+                dispatchGroup.leave()
+            }
+        
+        
+        dispatchGroup.enter()
+        Service.shared.fetchGames { (appGroup, error) in
+            if let error = error {
+                print("Failed to fetch games in Today controller: ", error)
+                return
+            }
+    
+            guard let appGroup = appGroup else { return }
+            gamesGroup = appGroup
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+             if let group = topGrossingGroup {
+                let newItem = TodayItem.init(category: "DAILY LIST", title: group.feed.title, image: #imageLiteral(resourceName: "close_button"), summary: "", backgroundColor: .white, apps: group.feed.results, cellType: .multipleApp)
+                self.items.append(newItem)
+            }
+            if let group = gamesGroup {
+                let newItem = TodayItem.init(category: "DAILY LIST", title: group.feed.title, image: #imageLiteral(resourceName: "close_button"), summary: "", backgroundColor: .white, apps: group.feed.results, cellType: .multipleApp)
+                self.items.append(newItem)
+            }
+            self.spinner.stopAnimating()
+            self.collectionView.reloadData()
+        }
+        
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

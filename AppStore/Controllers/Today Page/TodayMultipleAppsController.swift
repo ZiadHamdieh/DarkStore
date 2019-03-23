@@ -12,7 +12,7 @@ class TodayMultipleAppsController: BaseListController {
     
     fileprivate let cellId = "cellId"
     
-    fileprivate var results = [FeedResult]()
+    var results = [FeedResult]()
     
     fileprivate let cellSpacing: CGFloat = 16
     
@@ -23,22 +23,6 @@ class TodayMultipleAppsController: BaseListController {
         collectionView.isScrollEnabled = false
         
         collectionView.register(MultipleAppCell.self, forCellWithReuseIdentifier: cellId)
-        
-        fetchApps()
-    }
-    
-    fileprivate func fetchApps() {
-        Service.shared.fetchTopGrossing { (appGroup, error) in
-            if let error = error {
-                print("Failed to fetch Today multiple apps: ", error)
-            }
-            
-            guard let appGroup = appGroup else { return }
-            self.results = appGroup.feed.results
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
