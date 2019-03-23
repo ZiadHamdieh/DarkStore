@@ -143,64 +143,85 @@ class TodayPageController: BaseListController {
     }
     
     var todayAppController: TodayDetailAppController!
-    var topConstraint: NSLayoutConstraint?
-    var leadingConstraint: NSLayoutConstraint?
-    var widthConstraint: NSLayoutConstraint?
-    var heightConstraint: NSLayoutConstraint?
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        if items[indexPath.item].cellType == .multipleApp {
-            let fullViewController = TodayMultipleAppsController(mode: .fullScreen)
-            fullViewController.apps = items[indexPath.item].apps ?? []
-            present(BackEnabledNavigationController(rootViewController: fullViewController), animated: true, completion: nil)
-            return
+        switch items[indexPath.item].cellType {
+        case .multipleApp:
+            showFetchedAppListFullScreen(indexPath)
+        default:
+            showSingleAppFullScreen(indexPath)
         }
-        
+    }
+    
+    fileprivate func showFetchedAppListFullScreen(_ indexPath: IndexPath) {
+        let fullViewController = TodayMultipleAppsController(mode: .fullScreen)
+        fullViewController.apps = items[indexPath.item].apps ?? []
+        present(BackEnabledNavigationController(rootViewController: fullViewController), animated: true, completion: nil)
+    }
+    
+    fileprivate func setupSingleFullScreenController(_ indexPath: IndexPath) {
         let todayAppController = TodayDetailAppController()
         todayAppController.dismissHandler = {
             self.handleRemoveView()
         }
+        
         todayAppController.view.layer.cornerRadius = 15
         todayAppController.todayItem = items[indexPath.row]
+        self.todayAppController = todayAppController
+    }
+    
+    var anchoredConstraints: AnchoredConstraints?
+    
+    fileprivate func setupAppFullScreenStartingPosition(_ indexPath: IndexPath) {
         view.addSubview(todayAppController.view)
         addChild(todayAppController)
-        self.todayAppController = todayAppController
         collectionView.isUserInteractionEnabled = false
+        
+        setupStartingCellFrame(indexPath)
+        
+        guard let startingFrame = self.startingFrame else { return }
+        
+        self.anchoredConstraints = todayAppController.view.anchor(
+            top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil,
+            padding: .init(top: startingFrame.origin.y, left: startingFrame.origin.x, bottom: 0, right: 0),
+            size: .init(width: startingFrame.width, height: startingFrame.height))
+        
+        view.layoutIfNeeded()
+    }
+    
+    fileprivate func setupStartingCellFrame(_ indexPath: IndexPath) {
         guard let currentCell = collectionView.cellForItem(at: indexPath) else { return }
         // we actually need the cell's absolute coordinates
         guard let startingFrame = currentCell.superview?.convert(currentCell.frame, to: nil) else { return }
         
         self.startingFrame = startingFrame
-        
-        // auto layout constraint animation
-        todayAppController.view.translatesAutoresizingMaskIntoConstraints = false
-        topConstraint = todayAppController.view.topAnchor.constraint(equalTo: view.topAnchor, constant: startingFrame.origin.y)
-        leadingConstraint = todayAppController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: startingFrame.origin.x)
-        widthConstraint = todayAppController.view.widthAnchor.constraint(equalToConstant: startingFrame.width)
-        heightConstraint = todayAppController.view.heightAnchor.constraint(equalToConstant: startingFrame.height )
-        
-        [topConstraint, leadingConstraint, widthConstraint, heightConstraint].forEach({ $0?.isActive = true })
-        view.layoutIfNeeded()
-        
+    }
+    
+    fileprivate func beginAnimationOfAppFullScreen() {
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
- 
-            self.topConstraint?.constant = 0
-            self.leadingConstraint?.constant = 0
-            self.widthConstraint?.constant = self.view.frame.width
-            self.heightConstraint?.constant = self.view.frame.height
+            
+            self.anchoredConstraints?.top?.constant = 0
+            self.anchoredConstraints?.leading?.constant = 0
+            self.anchoredConstraints?.width?.constant = self.view.frame.width
+            self.anchoredConstraints?.height?.constant = self.view.frame.height
+            
             self.view.layoutIfNeeded()
             
             self.tabBarController?.tabBar.transform = CGAffineTransform(translationX: 0, y: 100)
             
-            guard let cell = todayAppController.tableView.cellForRow(at: [0,0]) as? TodayAppHeaderCell else {
+            guard let cell = self.todayAppController.tableView.cellForRow(at: [0,0]) as? TodayAppHeaderCell else {
                 return
             }
             cell.todayCell.topConstraint.constant = 48
             cell.layoutIfNeeded()
         }, completion: nil)
         
-        
+    }
+    
+    fileprivate func showSingleAppFullScreen(_ indexPath: IndexPath) {
+        setupSingleFullScreenController(indexPath)
+        setupAppFullScreenStartingPosition(indexPath)
+        beginAnimationOfAppFullScreen()
     }
     
     var startingFrame: CGRect?
@@ -212,10 +233,10 @@ class TodayPageController: BaseListController {
             
             guard let startingFrame = self.startingFrame else { return }
             
-            self.topConstraint?.constant = startingFrame.origin.y
-            self.leadingConstraint?.constant = startingFrame.origin.x
-            self.widthConstraint?.constant = startingFrame.width
-            self.heightConstraint?.constant = startingFrame.height
+            self.anchoredConstraints?.top?.constant = startingFrame.origin.y
+            self.anchoredConstraints?.leading?.constant = startingFrame.origin.x
+            self.anchoredConstraints?.width?.constant = startingFrame.width
+            self.anchoredConstraints?.height?.constant = startingFrame.height
             self.view.layoutIfNeeded()
             
             self.tabBarController?.tabBar.transform = .identity
