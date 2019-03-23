@@ -188,6 +188,9 @@ class TodayPageController: BaseListController, UIGestureRecognizerDelegate {
         let translationY = gesture.translation(in: todayAppController.view).y
         gesture.delegate = self
         
+        // Do not use the gesture if the tableView's content is scrolled down
+        if todayAppController.tableView.contentOffset.y > 0 { return }
+        
         if translationY > 0 {
             if gesture.state == .changed {
                 let scale = max(1 - translationY / 1000, 0.5)
