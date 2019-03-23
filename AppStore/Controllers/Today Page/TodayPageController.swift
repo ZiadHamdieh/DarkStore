@@ -64,6 +64,7 @@ class TodayPageController: BaseListController {
         view.addSubview(todayAppController.view)
         addChild(todayAppController)
         self.todayAppController = todayAppController
+        collectionView.isUserInteractionEnabled = false
         guard let currentCell = collectionView.cellForItem(at: indexPath) else { return }
         // we actually need the cell's absolute coordinates
         guard let startingFrame = currentCell.superview?.convert(currentCell.frame, to: nil) else { return }
@@ -89,6 +90,12 @@ class TodayPageController: BaseListController {
             self.view.layoutIfNeeded()
             
             self.tabBarController?.tabBar.transform = CGAffineTransform(translationX: 0, y: 100)
+            
+            guard let cell = todayAppController.tableView.cellForRow(at: [0,0]) as? TodayAppHeaderCell else {
+                return
+            }
+            cell.todayCell.topConstraint.constant = 48
+            cell.layoutIfNeeded()
         }, completion: nil)
         
         
@@ -110,9 +117,17 @@ class TodayPageController: BaseListController {
             self.view.layoutIfNeeded()
             
             self.tabBarController?.tabBar.transform = .identity
+            
+            guard let cell = self.todayAppController.tableView.cellForRow(at: [0,0]) as? TodayAppHeaderCell else {
+                return
+            }
+            cell.todayCell.topConstraint.constant = 24
+            
         }, completion: { _ in
 //            gesture.view?.removeFromSuperview()
             self.todayAppController.removeFromParent()
+            self.todayAppController.view.removeFromSuperview()
+            self.collectionView.isUserInteractionEnabled = true
         })
     }
     

@@ -26,6 +26,8 @@ class TodayCell: UICollectionViewCell {
         }
     }
     
+    var topConstraint: NSLayoutConstraint!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -46,7 +48,9 @@ class TodayCell: UICollectionViewCell {
             summaryLabel
             ], spacing: 8)
         addSubview(stackView)
-        stackView.fillSuperview(padding: .init(top: 24, left: 24, bottom: 24, right: 24))
+        stackView.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 24, bottom: 24, right: 24))
+        topConstraint = stackView.topAnchor.constraint(equalTo: topAnchor, constant: 24)
+        topConstraint.isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
