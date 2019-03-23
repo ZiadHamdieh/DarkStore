@@ -41,6 +41,7 @@ class TodayDetailAppController: UITableViewController {
             headerCell.closeButton.addTarget(self, action: #selector(handleDismiss), for: .touchUpInside)
             headerCell.todayCell.todayItem = todayItem
             headerCell.todayCell.layer.cornerRadius = 0
+            headerCell.clipsToBounds = true
             return headerCell
         }
         //TODO Fix this
