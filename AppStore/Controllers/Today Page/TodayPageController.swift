@@ -292,7 +292,7 @@ class TodayPageController: BaseListController, UIGestureRecognizerDelegate {
             guard let cell = self.todayAppController.tableView.cellForRow(at: [0,0]) as? TodayAppHeaderCell else {
                 return
             }
-            cell.closeButton.alpha = 0
+            self.todayAppController.closeButton.alpha = 0
             cell.todayCell.topConstraint.constant = 24
             cell.layoutIfNeeded()
             

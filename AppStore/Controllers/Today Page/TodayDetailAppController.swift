@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TodayDetailAppController: UITableViewController {
+class TodayDetailAppController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let cellId = "cellId"
     
@@ -16,16 +16,20 @@ class TodayDetailAppController: UITableViewController {
     
     var dismissHandler: (() -> ())?
     
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y < 0 {
-            // disable scrolling temporarily and re-enable it immediately
-            scrollView.isScrollEnabled.toggle()
-            scrollView.isScrollEnabled.toggle()
-        }
-    }
+    let tableView = UITableView(frame: .zero, style: .plain)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.clipsToBounds = true
+        
+        view.addSubview(tableView)
+        tableView.fillSuperview()
+        
+        setupCloseButton()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
         
         tableView.backgroundColor = .white
         tableView.register(TodayAppDescriptionCell.self, forCellReuseIdentifier: cellId)
@@ -39,14 +43,29 @@ class TodayDetailAppController: UITableViewController {
         tableView.contentInset = .init(top: 0, left: 0, bottom: statusBarHeight, right: 0)
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    let closeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(#imageLiteral(resourceName: "close_button"), for: .normal)
+        button.addTarget(self, action: #selector(handleDismiss), for: .touchUpInside)
+        return button
+    }()
+    
+    fileprivate func setupCloseButton() {
+        view.addSubview(closeButton)
+        closeButton.anchor(
+            top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor,
+            padding: .init(top: 12, left: 0, bottom: 0, right: 0),
+            size: .init(width: 80, height: 40))
+        
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let headerCell = TodayAppHeaderCell()
-            headerCell.closeButton.addTarget(self, action: #selector(handleDismiss), for: .touchUpInside)
             headerCell.todayCell.todayItem = todayItem
             headerCell.todayCell.layer.cornerRadius = 0
             headerCell.clipsToBounds = true
@@ -62,11 +81,19 @@ class TodayDetailAppController: UITableViewController {
         dismissHandler?()
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
             return TodayPageController.cellHeight
         }
-        return super.tableView(tableView, heightForRowAt: indexPath)
+        return UITableView.automaticDimension
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y < 0 {
+            // disable scrolling temporarily and re-enable it immediately
+            scrollView.isScrollEnabled.toggle()
+            scrollView.isScrollEnabled.toggle()
+        }
     }
     
 }
