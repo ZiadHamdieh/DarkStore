@@ -45,51 +45,16 @@ class TodayDetailAppController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     fileprivate func setupFloatingControl() {
-        let containerView = UIView()
-    
-        view.addSubview(containerView)
+        let floatingControlView = FloatingControlView()
+        view.addSubview(floatingControlView)
+        
         let bottomPadding = UIApplication.shared.statusBarFrame.height
-        containerView.anchor(
+        floatingControlView.anchor(
             top: nil, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor,
             padding: .init(top: 0, left: 16, bottom: bottomPadding, right: 16),
             size: .init(width: view.frame.width, height: 80))
-        containerView.layer.cornerRadius = 15
-        
-        let blurVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
-        containerView.addSubview(blurVisualEffectView)
-        blurVisualEffectView.fillSuperview()
-        containerView.clipsToBounds = true
-        
-        
-        let titleLabel = UILabel(text: "Life Hack", font: .boldSystemFont(ofSize: 18))
-        let subtitleLabel = UILabel(text: "Using your time", font: .systemFont(ofSize: 18))
-        let getButton = UIButton(title: "GET", cornerRadius: 15)
-        getButton.setTitleColor(.white, for: .normal)
-        getButton.backgroundColor = .darkGray
-        getButton.constrainWidth(constant: 60)
-        
-        
-        let imageView: UIImageView = {
-            let iv = UIImageView(cornerRadius: 12)
-            iv.constrainWidth(constant: 60)
-            iv.constrainHeight(constant: 60)
-            iv.image = todayItem?.image
-            return iv
-            
-        }()
-        
-        let stackView = UIStackView(arrangedSubViews: [
-            imageView,
-            VerticalStackView(arrangedSubviews: [
-                titleLabel,
-                subtitleLabel
-                ], spacing: 4),
-            UIView(),
-            getButton
-            ], spacing: 16)
-        containerView.addSubview(stackView)
-        stackView.fillSuperview(padding: .init(top: 0, left: 16, bottom: 0, right: 16))
-        stackView.alignment = .center
+//        floatingControlView.layer.cornerRadius = 15
+        floatingControlView.todayItem = todayItem
     }
     
     let closeButton: UIButton = {
