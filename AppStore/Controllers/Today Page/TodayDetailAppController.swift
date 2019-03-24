@@ -18,6 +18,8 @@ class TodayDetailAppController: UIViewController, UITableViewDelegate, UITableVi
     
     let tableView = UITableView(frame: .zero, style: .plain)
     
+    let floatingControlView = FloatingControlView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,16 +47,24 @@ class TodayDetailAppController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     fileprivate func setupFloatingControl() {
-        let floatingControlView = FloatingControlView()
         view.addSubview(floatingControlView)
         
-        let bottomPadding = UIApplication.shared.statusBarFrame.height
+//        let bottomPadding = UIApplication.shared.statusBarFrame.height
         floatingControlView.anchor(
             top: nil, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor,
-            padding: .init(top: 0, left: 16, bottom: bottomPadding, right: 16),
+            padding: .init(top: 0, left: 16, bottom: -90, right: 16),
             size: .init(width: view.frame.width, height: 80))
-//        floatingControlView.layer.cornerRadius = 15
         floatingControlView.todayItem = todayItem
+        
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+        
+    }
+    
+    @objc fileprivate func handleTap(sender: UIGestureRecognizer) {
+        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
+            self.floatingControlView.transform = .init(translationX: 0, y: -80)
+        })
+        
     }
     
     let closeButton: UIButton = {
@@ -108,6 +118,14 @@ class TodayDetailAppController: UIViewController, UITableViewDelegate, UITableVi
             scrollView.isScrollEnabled.toggle()
             scrollView.isScrollEnabled.toggle()
         }
+        
+        let translationY = -90 - UIApplication.shared.statusBarFrame.height
+        let transform = (scrollView.contentOffset.y > 100) ?
+            CGAffineTransform(translationX: 0, y: translationY) : .identity
+        
+        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
+                self.floatingControlView.transform = transform
+        })
     }
     
 }
