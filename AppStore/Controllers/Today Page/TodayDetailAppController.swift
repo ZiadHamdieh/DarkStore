@@ -49,7 +49,6 @@ class TodayDetailAppController: UIViewController, UITableViewDelegate, UITableVi
     fileprivate func setupFloatingControl() {
         view.addSubview(floatingControlView)
         
-//        let bottomPadding = UIApplication.shared.statusBarFrame.height
         floatingControlView.anchor(
             top: nil, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor,
             padding: .init(top: 0, left: 16, bottom: -90, right: 16),

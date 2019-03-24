@@ -55,6 +55,9 @@
 		99F028692245CFE8002A5952 /* MultipleAppCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F028682245CFE8002A5952 /* MultipleAppCell.swift */; };
 		99F0286B2245F606002A5952 /* backEnabledNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F0286A2245F606002A5952 /* backEnabledNavigationController.swift */; };
 		99F0286F22470CC8002A5952 /* FloatingControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F0286E22470CC8002A5952 /* FloatingControlView.swift */; };
+		99F02872224718F6002A5952 /* MusicPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F02871224718F6002A5952 /* MusicPageController.swift */; };
+		99F02875224719D0002A5952 /* TrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F02874224719D0002A5952 /* TrackCell.swift */; };
+		99F0287722471D5B002A5952 /* MusicLoadingFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F0287622471D5B002A5952 /* MusicLoadingFooter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +111,9 @@
 		99F028682245CFE8002A5952 /* MultipleAppCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleAppCell.swift; sourceTree = "<group>"; };
 		99F0286A2245F606002A5952 /* backEnabledNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = backEnabledNavigationController.swift; sourceTree = "<group>"; };
 		99F0286E22470CC8002A5952 /* FloatingControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingControlView.swift; sourceTree = "<group>"; };
+		99F02871224718F6002A5952 /* MusicPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPageController.swift; sourceTree = "<group>"; };
+		99F02874224719D0002A5952 /* TrackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCell.swift; sourceTree = "<group>"; };
+		99F0287622471D5B002A5952 /* MusicLoadingFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicLoadingFooter.swift; sourceTree = "<group>"; };
 		D22DEAFB6245F819EBB98488 /* Pods-AppStore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStore.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppStore/Pods-AppStore.debug.xcconfig"; sourceTree = "<group>"; };
 		EB436F0E99115F8F37BA63BF /* Pods-AppStore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStore.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppStore/Pods-AppStore.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -266,6 +272,7 @@
 				99DC2E852238D6E200FA46EA /* TabBarController.swift */,
 				99724C0F223DF38B00204535 /* BaseListController.swift */,
 				99724C2C22418D6000204535 /* HoriztonalSnappingController.swift */,
+				99F02870224718E8002A5952 /* Music Page */,
 				99724C462243761400204535 /* Today Page */,
 				99724C4522436C8E00204535 /* App Detail Page */,
 				99724C11223DF43300204535 /* Search Page */,
@@ -277,6 +284,7 @@
 		99DC2E832238D6B200FA46EA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				99F02873224719B3002A5952 /* Music Page */,
 				99724C49224376D800204535 /* Today Page */,
 				99724C15223DF5B900204535 /* Search Page */,
 				99724C12223DF59300204535 /* Apps Page */,
@@ -316,6 +324,23 @@
 				99DC2E91223C73FD00FA46EA /* Service.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		99F02870224718E8002A5952 /* Music Page */ = {
+			isa = PBXGroup;
+			children = (
+				99F02871224718F6002A5952 /* MusicPageController.swift */,
+			);
+			path = "Music Page";
+			sourceTree = "<group>";
+		};
+		99F02873224719B3002A5952 /* Music Page */ = {
+			isa = PBXGroup;
+			children = (
+				99F02874224719D0002A5952 /* TrackCell.swift */,
+				99F0287622471D5B002A5952 /* MusicLoadingFooter.swift */,
+			);
+			path = "Music Page";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -458,9 +483,11 @@
 				99724C19223DFDFC00204535 /* UIView+Layout.swift in Sources */,
 				99724C0E223DF22700204535 /* AppsPageController.swift in Sources */,
 				99F0285B22447880002A5952 /* TodayDetailAppController.swift in Sources */,
+				99F02875224719D0002A5952 /* TrackCell.swift in Sources */,
 				99724C17223DF8A600204535 /* UILabelExtension.swift in Sources */,
 				99724C3A22420DCF00204535 /* PreviewScreenshotController.swift in Sources */,
 				99724C3E22421CC500204535 /* AppReviewsCell.swift in Sources */,
+				99F0287722471D5B002A5952 /* MusicLoadingFooter.swift in Sources */,
 				99724C2B2240BAC000204535 /* HeaderResult.swift in Sources */,
 				99724C2922406CD400204535 /* AppGroup.swift in Sources */,
 				99724C482243763000204535 /* TodayPageController.swift in Sources */,
@@ -471,6 +498,7 @@
 				99F0285D2244B83E002A5952 /* TodayAppDescriptionCell.swift in Sources */,
 				99724C27223F78AA00204535 /* AppsPageHeaderCell.swift in Sources */,
 				99724C1B223DFF4D00204535 /* AppsHorizontalController.swift in Sources */,
+				99F02872224718F6002A5952 /* MusicPageController.swift in Sources */,
 				99724C42224221B100204535 /* ReviewCell.swift in Sources */,
 				99724C1D223F652D00204535 /* AppRowCell.swift in Sources */,
 				99724C14223DF5AC00204535 /* AppsGroupCell.swift in Sources */,
