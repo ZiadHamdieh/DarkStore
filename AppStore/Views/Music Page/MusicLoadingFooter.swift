@@ -10,15 +10,19 @@ import UIKit
 
 class MusicLoadingFooter: UICollectionViewCell {
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
+    let spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView(style: .whiteLarge)
         spinner.color = .darkGray
         spinner.startAnimating()
         spinner.hidesWhenStopped = true
+        return spinner
+    }()
+    
+    let label = UILabel(text: "Loading More...", font: .systemFont(ofSize: 16))
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        let label = UILabel(text: "Loading More...", font: .systemFont(ofSize: 16))
         label.textAlignment = .center
         
         let stackView = VerticalStackView(arrangedSubviews: [
@@ -28,7 +32,6 @@ class MusicLoadingFooter: UICollectionViewCell {
         addSubview(stackView)
         
         stackView.centerInSuperview(size: .init(width: 200, height: 0))
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
