@@ -2,4 +2,6 @@
 
 ### An iOS App Store Replica
 
-Pods used: SDWebImage
+The dark theme is currently under development. The screenshots below are from the version of the app prior to the dark mode implementation.
+
+
