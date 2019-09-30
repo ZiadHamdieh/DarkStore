@@ -4,6 +4,9 @@
 
 The dark theme is currently under development. The screenshots below are from the version of the app prior to the dark mode implementation.
 
+____________
+### Screenshots
+
 
 #### "Today" Screen
 
@@ -28,4 +31,22 @@ The dark theme is currently under development. The screenshots below are from th
 
 <p align="center">
   <img src="/screenshots/search.png" width="30%">
+</p>
+
+____________
+### In Action
+
+#### "Today" Screen
+<p align="center">
+  <img src="/gifs/today.gif" width="30%">
+</p>
+
+#### "Apps" Screen
+<p align="center">
+  <img src="/gifs/apps.gif" width="30%">
+</p>
+
+#### "Search" Screen
+<p align="center">
+  <img src="/gifs/search.gif" width="30%">
 </p>
