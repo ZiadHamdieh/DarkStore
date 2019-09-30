@@ -51,7 +51,7 @@ class TodayDetailAppController: UIViewController, UITableViewDelegate, UITableVi
         
         floatingControlView.anchor(
             top: nil, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor,
-            padding: .init(top: 0, left: 16, bottom: -90, right: 16),
+            padding: .init(top: 0, left: 16, bottom: -70, right: 16),
             size: .init(width: view.frame.width, height: 80))
         floatingControlView.todayItem = todayItem
         

@@ -10,9 +10,9 @@ import UIKit
 
 class TodayCell: BaseTodayCell {
     
-    let imageView = UIImageView(image: #imageLiteral(resourceName: "garden"))
+    let imageView = UIImageView(image: #imageLiteral(resourceName: "appleLogo"))
     
-    let categoryLabel = UILabel(text: "LIFE HACK", font: .boldSystemFont(ofSize: 20))
+    let categoryLabel = UILabel(text: "LIFE AT APPLE", font: .boldSystemFont(ofSize: 20))
     let titleLabel = UILabel(text: "UTILIZING YOUR TIME", font: .boldSystemFont(ofSize: 28))
     let summaryLabel = UILabel(text: "All the tools and apps you need to intelligently organize your life the right way.", font: .systemFont(ofSize: 18), numberOfLines: 3)
     

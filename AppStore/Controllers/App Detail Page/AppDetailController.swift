@@ -93,7 +93,7 @@ class AppDetailController: BaseListController {
             return cell
         }
     }
-    
+
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 3
     }

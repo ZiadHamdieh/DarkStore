@@ -83,13 +83,13 @@ class TodayPageController: BaseListController, UIGestureRecognizerDelegate {
         }
         
         dispatchGroup.notify(queue: .main) {
-            self.items.append(TodayItem.init(category: "LIFE HACK", title: "TRAVEL ON A BUDGET", image: #imageLiteral(resourceName: "garden"), summary: "Find out all about how you need to travel without packing", backgroundColor: #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1), apps: nil, cellType: .singleApp))
+            self.items.append(TodayItem.init(category: "LIFE AT APPLE", title: "LOREM IPSUM DOLOR", image: #imageLiteral(resourceName: "appleLogo"), summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", backgroundColor: #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1), apps: nil, cellType: .singleApp))
             
             if let group = topGrossingGroup {
                 let newItem = TodayItem.init(category: "DAILY LIST", title: group.feed.title, image: #imageLiteral(resourceName: "close_button"), summary: "", backgroundColor: .white, apps: group.feed.results, cellType: .multipleApp)
                 self.items.append(newItem)
             }
-            self.items.append(TodayItem.init(category: "HOLIDAYS", title: "TRAVEL ON A BUDGET", image: #imageLiteral(resourceName: "holiday"), summary: "Find out all about how you need to travel without packing", backgroundColor: #colorLiteral(red: 0.9862952828, green: 0.9632481933, blue: 0.7315776944, alpha: 1), apps: nil, cellType: .singleApp))
+            self.items.append(TodayItem.init(category: "HOLIDAYS", title: "PERFECT DESTINATION", image: #imageLiteral(resourceName: "holiday"), summary: "Find out all about how you need to travel without packing", backgroundColor: #colorLiteral(red: 0.9862952828, green: 0.9632481933, blue: 0.7315776944, alpha: 1), apps: nil, cellType: .singleApp))
             self.spinner.stopAnimating()
             self.collectionView.reloadData()
             

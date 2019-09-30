@@ -11,8 +11,8 @@ import UIKit
 class AppsPageHeaderCell: UICollectionViewCell {
     
     let imageView = UIImageView(cornerRadius: 12)
-    let highlightAppLabel = UILabel(text: "facebook", font: .boldSystemFont(ofSize: 16))
-    let highlightDescriptionLabel = UILabel(text: "Keeping up with friends is faster than ever", font: .systemFont(ofSize: 24))
+    let highlightAppLabel = UILabel(text: "Apple", font: .boldSystemFont(ofSize: 16))
+    let highlightDescriptionLabel = UILabel(text: "The iPhone 11 Pro", font: .systemFont(ofSize: 24))
     
     override init(frame: CGRect) {
         super.init(frame: frame)
