@@ -29,14 +29,3 @@ The dark theme is currently under development. The screenshots below are from th
 <p align="center">
   <img src="/screenshots/search.png" width="30%">
 </p>
-
-
-
-#### "Apps" Screen
-
-
-<p align="center">
-  <img src="/screenshots/apps.png" width="30%"> 
-  <img width="30%" src="/screenshots/apps2.png">
-  <img src="screenshots/appView.png" width="30%" align="right">
-</p>
